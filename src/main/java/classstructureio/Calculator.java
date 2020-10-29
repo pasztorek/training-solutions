@@ -12,6 +12,8 @@ public class Calculator {
         System.out.println("Kérek egy másik számot");
         int b = scannerB.nextInt();
 
+        System.out.println(a + "+" + b );
+        System.out.println(a + b);
 
     }
 }
