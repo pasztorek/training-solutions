@@ -19,14 +19,6 @@ public class Product {
         return price;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public void increasePrice(int emel){
         this.price = price + emel;
 
