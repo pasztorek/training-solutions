@@ -35,8 +35,11 @@ public class BankAccountMain {
 
         BankAccount szamla2 = new BankAccount(Owner2, Number2, Balance2);
 
+        System.out.println("Mennyit utalunk az első számláról a másodikra?");
+        Scanner utal = new Scanner(System.in);
+        int Utal = utal.nextInt();
 
-
+        szamla1.transfer(szamla2, Utal);
 
 
         System.out.println(szamla1.getInfo());

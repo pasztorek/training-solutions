@@ -23,9 +23,12 @@ public class BankAccount {
     }
 
     public void transfer (BankAccount to, int amount) {
-        this.balance = balance - amount;
+       to.deposit(amount);
+       withdraw(amount);
+
 
     }
+
     public String getInfo (){
 
         return owner + " (" + accountNumber + ") : " + balance + " Ft";
