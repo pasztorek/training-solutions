@@ -34,6 +34,13 @@ public class BankAccountMain {
         int Balance2 = account2balance.nextInt();
         BankAccount szamla2 = new BankAccount(Owner2, Number2, Balance2);
 
+        System.out.println("Betét ehelyezése az első számlára:");
+        Scanner Betet = new Scanner(System.in);
+        szamla1.deposit(Betet.nextInt());
+
+        System.out.println("Pénzfelvétel a második számláról:");
+        Scanner Kivet = new Scanner(System.in);
+        szamla2.withdraw(Kivet.nextInt());
 
         System.out.println("Mennyit utalunk az első számláról a másodikra?");
         Scanner utal = new Scanner(System.in);
