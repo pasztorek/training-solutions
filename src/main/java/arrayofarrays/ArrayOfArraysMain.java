@@ -22,5 +22,13 @@ public class ArrayOfArraysMain {
         return szorzo;
     }
 
+    public int[][] getValues() {
+        int[] napok= {31,29,31,30,31,30,31,31,30,31,30,31};
+        int [][] naptar = new int[12][];
+        for (int i=0; i<=napok.length; i++){
+            naptar[i][napok[i]] = i;
 
+        }
+            return naptar;
+    }
 }
