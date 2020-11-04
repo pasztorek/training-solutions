@@ -1,5 +1,6 @@
 package arrays;
 
+import javax.swing.table.TableCellEditor;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ public class ArraysMain {
         ArraysMain tombok = new ArraysMain();
         System.out.println(tombok.numberOfDaysAsString());
         System.out.println(tombok.daysOfWeek());
+        System.out.println(tombok.multiplicationTableAsString(5));
 
     }
 
@@ -24,5 +26,16 @@ public class ArraysMain {
 
 
             return napok;
+    }
+
+    public String multiplicationTableAsString(int size){
+        int[] table = new int[size];
+        for(int i=0; i<size; i++){
+            table[i]=i*size;
+
+
+        }
+        return Arrays.toString(table);
+
     }
 }
