@@ -27,4 +27,8 @@ public class Person {
 
     }
 
+    public Address getAddress(){
+        return address;
+    }
+
 }
