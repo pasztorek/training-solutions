@@ -38,10 +38,17 @@ public class Office {
 
         }
 
-        public void printMeetingRoomsWithName(String szobanev){
+        public void printMeetingRoomsWithName(String name){
             for(MeetingRoom room : iroda){
-                if(room.getName().toString() == szobanev){
+                if(room.getName().toString() == name){
                     System.out.println(room.getName().toString() + " "+ room.getWitdth() + "m * " + room.getLenght() + "m = " + room.getLenght()*room.getWitdth() + " m2");
+                }
+            }
+        }
+        public void printMeetingRoomsContains(String part) {
+            for (MeetingRoom room : iroda) {
+                if (room.getName().toString() == part) {
+                    System.out.println(room.getName().toString() + " " + room.getWitdth() + "m * " + room.getLenght() + "m = " + room.getLenght() * room.getWitdth() + " m2");
                 }
             }
         }
