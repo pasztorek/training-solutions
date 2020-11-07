@@ -28,7 +28,7 @@ public class Controller {
         Scanner szobahossz = new Scanner(System.in);
         int hossz = szobahossz.nextInt();
 
-        System.out.println("Tárgyaló hosszúsága(m) ?");
+        System.out.println("Tárgyaló szélessége(m) ?");
         Scanner szobaszelesseg = new Scanner(System.in);
         int szelesseg = szobaszelesseg.nextInt();
 
