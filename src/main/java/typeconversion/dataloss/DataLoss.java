@@ -14,6 +14,6 @@ public class DataLoss {
                 System.out.println(szaml);
                 szamlalo=szamlalo+1;
             }
-        }
+         }
     }
     }
