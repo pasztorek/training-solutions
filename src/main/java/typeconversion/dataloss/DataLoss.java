@@ -7,12 +7,13 @@ public class DataLoss {
         float szam3 = (long) (float) szaml;
         System.out.println(Long.MAX_VALUE);
 
-        for(szaml=1; szaml<Long.MAX_VALUE; szaml++) {
-            szam3 = (long) (float) szaml;
+        for (szaml = 1; szaml < Long.MAX_VALUE; szaml++) {
+            szaml = (long) szam3;
 
-            if (szaml != szam3) ;
+            if (szaml != szam3) {
 
+                System.out.println(szaml);
+            }
         }
-
     }
-}
+    }
