@@ -17,15 +17,11 @@ public class PiGenerator {
 
         for (int i = 0; i < pivers.vers.length(); i++) {
 
-
-            if (!pivers.vers.substring(i, i + 1).equals(" ")) {
-                if (!pivers.vers.substring(i, i + 1).equals(".")) {
-                    if (!pivers.vers.substring(i, i + 1).equals(",")) {
-                        szamlalo = szamlalo + 1;
-                    }
-                }
+            if (!karakterek.contains(pivers.vers.substring(i, i + 1))) {
+                szamlalo = szamlalo + 1;
 
             }
+
             if (karakterek.contains(pivers.vers.substring(i, i + 1))) {
                 pi = pi + szamlalo;
                 szamlalo = 0;
