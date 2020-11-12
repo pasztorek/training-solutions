@@ -8,6 +8,10 @@ public class SsnValidator {
         int paratlanosszeg=0;
         int parososszeg=0;
 
+            if(ssn.length()!=9) {
+                return false;
+            }
+
         for (int i=0; i<8 ;i=i+2) {
             int paratlan = Integer.parseInt(ssn.substring(i, i + 1)) * 3;
             paratlanosszeg = paratlanosszeg + paratlan;

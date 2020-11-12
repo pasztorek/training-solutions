@@ -7,9 +7,15 @@ public class Patient {
     int yearOfBirth;
 
     public Patient(String name, String socialSecurityNumber, int yearOfBirth) {
-        if(yearOfBirth < 1900 | name == null) {
+        if(yearOfBirth < 1900) {
             throw new IllegalArgumentException("Wrong args!");
         }
+
+        if(name == null) {
+            throw new IllegalArgumentException("Wrong args!");
+        }
+
+
 
 
 
