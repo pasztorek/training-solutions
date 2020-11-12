@@ -7,16 +7,25 @@ public class Patient {
     int yearOfBirth;
 
     public Patient(String name, String socialSecurityNumber, int yearOfBirth) {
-        if(yearOfBirth < 1900 | name ==null) {
+        if(yearOfBirth < 1900 | name == null) {
             throw new IllegalArgumentException("Wrong args!");
         }
+
+
+
+        if(!new SsnValidator().isValidSsn(socialSecurityNumber)) {
+            throw new IllegalArgumentException("Invalid Social Security Number: " + socialSecurityNumber);
+        }
+
         this.name = name;
         this.socialSecurityNumber = socialSecurityNumber;
         this.yearOfBirth = yearOfBirth;
     }
 
     public static void main(String[] args) {
-        Patient beteg = new Patient("1","12345", 1900);
+        Patient beteg = new Patient("1","123456789", 1900);
+        SsnValidator taj = new SsnValidator();
+        taj.isValidSsn("123456789");
 
     }
 
