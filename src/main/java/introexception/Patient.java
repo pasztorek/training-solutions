@@ -23,9 +23,9 @@ public class Patient {
     }
 
     public static void main(String[] args) {
-        Patient beteg = new Patient("1","123456789", 1900);
+        Patient beteg = new Patient("1","123456788", 1900);
         SsnValidator taj = new SsnValidator();
-        taj.isValidSsn("123456789");
+        //taj.isValidSsn("123456788");
 
     }
 
