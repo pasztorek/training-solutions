@@ -36,7 +36,7 @@ public class PiGenerator {
 
     public String getPi(){
         PiGenerator pivers = new PiGenerator();
-        List<String> karakterek = new ArrayList<>(Arrays.asList(" ", ".", ","));
+        List<String> karakterek = new ArrayList<>(Arrays.asList(" ",".",","));
         int szamlalo = 0;
         String pi = "";
         boolean tizedes = false;
@@ -48,7 +48,7 @@ public class PiGenerator {
 
             }
 
-            if (karakterek.contains(pivers.vers.substring(i, i + 1))) {
+            if (karakterek.contains(pivers.vers.substring(i, i + 1)) & szamlalo!=0) {
                 pi = pi + szamlalo;
                 szamlalo = 0;
                 if (tizedes == false){
