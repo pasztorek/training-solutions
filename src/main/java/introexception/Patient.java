@@ -29,5 +29,15 @@ public class Patient {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
 }
