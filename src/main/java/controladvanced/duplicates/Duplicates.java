@@ -26,9 +26,7 @@ public class Duplicates {
                      Ered[i]=Ered[i]+1;
                 }
             }
-
         }
         return Ered;
     }
-
 }
