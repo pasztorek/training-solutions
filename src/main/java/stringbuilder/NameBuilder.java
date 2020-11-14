@@ -48,7 +48,7 @@ public class NameBuilder {
         }
 
         if(isEmpty(familyName) || isEmpty(givenName)){
-            throw new IllegalArgumentException("Család és keresztnév kötelező");
+            throw new IllegalArgumentException("Family name and given name must not be empty!");
         }
 
 
@@ -66,19 +66,26 @@ public class NameBuilder {
         return eredmeny.toString();
 
     }
+
+
+
+
     public String insertTitle(String name, Title title, String where){
+        StringBuilder eredmeny = new StringBuilder(name);
+        eredmeny = eredmeny.insert(eredmeny.indexOf(where)+1, title.title+" ");
 
-
-        return name;
+        return eredmeny.toString();
     }
     public String deleteNamePart(String name, String delete){
+        StringBuilder eredmeny = new StringBuilder(name);
+        eredmeny = eredmeny.delete(eredmeny.indexOf(delete), eredmeny.indexOf(delete)+delete.length());
 
-
-        return name;
+        return eredmeny.toString();
     }
 
     public boolean isEmpty(String str) {
         return str == null || "".equals(str.trim());
     }
+
 
 }
