@@ -71,7 +71,6 @@ public class StringScanner {
                 eredmeny = eredmeny+"\n";
             }
         }
-
         return eredmeny.trim();
     }
 }
