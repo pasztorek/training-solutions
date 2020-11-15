@@ -1,10 +1,17 @@
 package formatlocaleprintf;
 
+import java.util.Locale;
+import java.util.MissingFormatArgumentException;
+
 public class PrintFormat {
 
-    public String formatMessageWithIntegerParameters(String formatString, Integer i, Integer j){
+    public String formatMessageWithIntegerParameters(String formatString, Integer i, Integer j) {
 
-        return formatString;
+        try {
+            return String.format(new Locale("hu", "HU"), formatString, i, j);
+        } catch (MissingFormatArgumentException ex) {
+            throw new IllegalArgumentException("Less objects then expected in format String!", ex);
+        }
     }
 
     public String checkException(String formatString, Integer i, Integer j){
@@ -13,22 +20,26 @@ public class PrintFormat {
     }
 
     public String printFormattedText(Double number){
+        String eredmeny = "Total is: %,.2f Ft";
 
-        return "";
+        return String.format(new Locale("hu","HU"), eredmeny, number);
     }
 
     public String printFormattedText(int count, String fruit){
+        String eredmeny = "We counted %d %s in the basket";
 
-        return fruit;
+        return String.format(eredmeny, count, fruit);
     }
 
     public String printFormattedText(int number){
+        String eredmeny = "Right edge of numbers set at 4 spaces from text:%4d";
 
-        return "";
+        return String.format(eredmeny,number);
     }
 
     public String printFormattedText(Integer i, Integer j, Integer k){
+        String eredmeny = "Multiple objects containing text:%d\t%d\t%d";
 
-        return "";
+        return String.format(eredmeny,i,j,k);
     }
 }
