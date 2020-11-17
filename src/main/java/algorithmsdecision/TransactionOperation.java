@@ -1,5 +1,5 @@
 package algorithmsdecision;
 
 public enum TransactionOperation {
-    CREDIT,DEBIT
+    CREDIT, DEBIT
 }

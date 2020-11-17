@@ -17,10 +17,10 @@ public class TransactionTest {
     public void transactionCreateTest() {
         Transaction transaction = new Transaction("1234-234-345", TransactionOperation.CREDIT, 10000, dateTime);
 
-        assertTrue(transaction.isCredit());
-        assertFalse(transaction.isDebit());
-        assertEquals(10000, transaction.getAmount());
-        assertEquals(dateTime, transaction.getDateOfTransaction());
-        assertEquals("1234-234-345", transaction.getAccountNumber());
+       assertTrue(transaction.isCredit());
+       assertFalse(transaction.isDebit());
+       assertEquals(10000, transaction.getAmount());
+       assertEquals(dateTime, transaction.getDateOfTransaction());
+       assertEquals("1234-234-345", transaction.getAccountNumber());
     }
 }

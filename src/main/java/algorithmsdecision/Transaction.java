@@ -2,6 +2,9 @@ package algorithmsdecision;
 
 import java.time.LocalDateTime;
 
+import static algorithmsdecision.TransactionOperation.CREDIT;
+import static algorithmsdecision.TransactionOperation.DEBIT;
+
 public class Transaction {
 
     private String accountNumber;
@@ -37,12 +40,16 @@ public class Transaction {
         return status;
     }
     public boolean isCredit(){
-
-        return true;
+        if(this.transactionOperation.equals(CREDIT)){
+            return true;
+        }
+            return false;
     }
 
     public boolean isDebit(){
-
-        return true;
+        if(this.transactionOperation.equals(DEBIT)){
+            return true;
+        }
+            return false;
     }
 }
