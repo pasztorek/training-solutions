@@ -36,12 +36,12 @@ public class Transaction {
     public TransactionStatus getStatus() {
         return status;
     }
-    public boolean isCredit(Transaction transaction){
+    public boolean isCredit(){
 
         return true;
     }
 
-    public boolean isDebit(Transaction transaction){
+    public boolean isDebit(){
 
         return true;
     }
