@@ -6,9 +6,6 @@ import static algorithmsdecision.TransactionOperation.CREDIT;
 
 public class TransactionExecutor {
 
-    private List <BankAccount> bankAccounts;
-    private List <Transaction> transactions;
-
     public void executeTransactions(List<Transaction> transactions, List<BankAccount> bankAccounts){
 
 
