@@ -13,5 +13,4 @@ public class BankAccountConditionCounter{
         }
                 return sum;
     }
-
 }
