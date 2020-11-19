@@ -13,12 +13,17 @@ public class Tutor {
         this.taughtSubject = taughtSubject;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     public boolean tutorTeachingSubject(Subject subject) {
-
-        return true;
+           for(int i=0; i<taughtSubject.size(); i++) {
+               if (taughtSubject.get(i).getSubjectName().equals(subject.getSubjectName())) {
+                   return true;
+               }
+           }
+            return false;
     }
 }

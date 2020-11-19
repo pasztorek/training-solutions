@@ -18,16 +18,22 @@ public class Mark {
         return tutor;
     }
 
-
-
     public Mark(Subject subject, Tutor tutor) {
         this.subject = subject;
         this.tutor = tutor;
     }
 
     public Mark(MarkType marktype, Subject subject, Tutor tutor) {
+      if(subject == null){
+      throw new NullPointerException("Both subject and tutor must be provided!");
+      }
         this.marktype = marktype;
         this.subject = subject;
         this.tutor = tutor;
+    }
+
+    @Override
+    public String toString() {
+        return marktype.getDescription()+"("+marktype.getValue()+")";
     }
 }

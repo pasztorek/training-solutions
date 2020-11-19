@@ -19,27 +19,42 @@ public class ClassRecords {
         return className;
     }
 
-    public boolean addStudent(Student student){
+    public boolean addStudent(Student student) {
 
         return true;
     }
 
-    public boolean removeStudent(Student student){
+    public boolean removeStudent(Student student) {
 
         return true;
     }
 
-    public double calculateClassAverage(){
+    public double calculateClassAverage() {
 
         return 3.0;
     }
 
-    public double calculateClassAverageBySubject(){
+    public double calculateClassAverageBySubject(Subject subject) {
 
         return 3.0;
     }
-    public Student findStudentByName(String name){
 
-        return students.get(0);
+    public Student findStudentByName(String name) {
+
+        return findStudentByName(name);
+    }
+
+    public Student repetition() {
+
+        return repetition();
+    }
+
+    public List<StudyResultByName> listStudyResults(){
+
+        return listStudyResults();
+    }
+    public String listStudentNames(){
+
+        return"1";
     }
 }

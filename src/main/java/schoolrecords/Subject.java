@@ -5,11 +5,14 @@ public class Subject {
     private String subjectName;
 
 
-    public String getSubjectName() {
+    public String getSubjectName()
+
+    {
         return subjectName;
     }
 
-    public Subject(String subjectName) {
+    public Subject(String subjectName)
+    {
         this.subjectName = subjectName;
     }
 }

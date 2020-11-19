@@ -9,6 +9,10 @@ public class Student {
     private String name;
 
     public Student(String name) {
+        if (name == null || name.equals("")) {
+            throw new IllegalArgumentException("Student name must not be empty!");
+        }
+
         this.name = name;
     }
 
@@ -16,20 +20,31 @@ public class Student {
         return name;
     }
 
-    public void grading(Mark mark){
-
-
+    public void grading(Mark mark) {
+        if (mark == null) {
+            throw new NullPointerException("Mark must not be null!");
+        }
+        marks.add(mark);
     }
 
-    public double calculateAverage(){
+    public double calculateAverage() {
 
         return 3.0;
     }
 
-    public double calculateSubjectAverage(Subject subject){
+    public double calculateSubjectAverage(Subject subject) {
 
         return 3.0;
     }
 
+
+    @Override
+    public String toString() {
+        String grade=null;
+
+        for (int i = 0; i < marks.size(); i++) {
+            grade = name + " marks: " + marks.get(i).getSubject().getSubjectName() + ": " + marks.get(i).toString();
+        }
+            return grade;
+    }
 }
-
