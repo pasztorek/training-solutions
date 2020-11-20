@@ -20,16 +20,36 @@ public class ClassRecords {
     }
 
     public boolean addStudent(Student student) {
+        int contains= 0;
+        students.add(student);
 
+        for(int i=0; i<=students.size()-1; i++) {
+            if (students.get(i).getName().equals(student.getName())) {
+                contains++;
+           }
+        }
+            if (contains > 1) {
+                students.remove(student);
+                return false;
+            }
         return true;
     }
 
     public boolean removeStudent(Student student) {
 
-        return true;
+        for(int i=0; i<=students.size()-1; i++) {
+            if (students.get(i).getName().equals(student.getName())) {
+                students.remove(student);
+                return true;
+            }
+        }
+        return false;
     }
 
     public double calculateClassAverage() {
+        if(students.size()==0){
+            throw new ArithmeticException("No student in the class, average calculation aborted!");
+        }
 
         return 3.0;
     }
