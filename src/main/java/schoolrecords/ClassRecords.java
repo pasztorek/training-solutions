@@ -47,11 +47,26 @@ public class ClassRecords {
     }
 
     public double calculateClassAverage() {
-        if(students.size()==0){
+        double avgsum = 0.00;
+        double avgclasssum =0.00;
+
+        if (students.size() == 0) {
             throw new ArithmeticException("No student in the class, average calculation aborted!");
         }
 
-        return 3.0;
+        for (Student std : students) {
+            avgsum = std.calculateAverage()+avgsum;
+        }
+
+        if (avgsum == 0.00) {
+            throw new ArithmeticException("No marks present, average calculation aborted!");
+        }
+
+   //     for (Student std : students) {
+   //         avgsum = avgsum + std.calculateAverage();
+   //     }
+
+        return avgsum / students.size();
     }
 
     public double calculateClassAverageBySubject(Subject subject) {
