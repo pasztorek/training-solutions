@@ -45,8 +45,22 @@ public class Student {
     }
 
     public double calculateSubjectAverage(Subject subject) {
+        double avg = 0.00;
+        int subjetCounter=0;
 
-        return 3.0;
+
+        for (int i = 0; i < marks.size(); i++) {
+            if (marks.get(i).getSubject().equals(subject)) {
+                avg = marks.get(i).getMarkType().getValue() + avg;
+                subjetCounter++;
+            }
+        }
+        avg = avg / subjetCounter;
+
+        int temp = (int)(avg * 100);
+        avg = ((double)temp)/100;
+
+        return avg;
     }
 
     @Override
