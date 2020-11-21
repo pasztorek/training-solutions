@@ -50,7 +50,7 @@ public class Student {
 
 
         for (int i = 0; i < marks.size(); i++) {
-            if (marks.get(i).getSubject().equals(subject)) {
+            if (marks.get(i).getSubject().getSubjectName().equals(subject.getSubjectName())) {
                 avg = marks.get(i).getMarkType().getValue() + avg;
                 subjetCounter++;
             }

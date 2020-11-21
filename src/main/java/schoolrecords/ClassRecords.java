@@ -70,8 +70,19 @@ public class ClassRecords {
     }
 
     public double calculateClassAverageBySubject(Subject subject) {
+        String subj = subject.getSubjectName();
+        Double subjAvgSum= 0.00;
+        int counter= 0;
 
-        return 3.0;
+        for(Student std: students){
+            if (std.calculateSubjectAverage(subject)!=0){
+                subjAvgSum = std.calculateSubjectAverage(subject) + subjAvgSum;
+                counter++;
+             }
+        }
+
+
+        return subjAvgSum/counter;
     }
 
     public Student findStudentByName(String name) {
