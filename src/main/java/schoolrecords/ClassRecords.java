@@ -80,27 +80,49 @@ public class ClassRecords {
                 counter++;
              }
         }
-
-
         return subjAvgSum/counter;
     }
 
     public Student findStudentByName(String name) {
-
-        return findStudentByName(name);
-    }
+            if(students.size()==0){
+                throw new  IllegalStateException("No students to search!");
+            }
+            if(name.equals("")){
+                throw new IllegalArgumentException("Student name must not be empty!");
+            }
+            for(Student std: students){
+                if(std.getName().equals(name)){
+                    return std;
+                }
+            throw new IllegalArgumentException("Student by this name cannot be found! Kiss Rita");
+            }
+            return students.get(2);
+            }
 
     public Student repetition() {
+        if(students.size()==0){
+            throw new  IllegalStateException("No students to select for repetition!");
+        }
 
-        return repetition();
+        return students.get(rnd.nextInt(students.size()+1));
     }
 
     public List<StudyResultByName> listStudyResults(){
+           List<StudyResultByName> srbn = new ArrayList<>();
 
-        return listStudyResults();
+        for(int i=0; i<students.size(); i++){
+         srbn.add(new StudyResultByName(students.get(i).getName(), students.get(i).calculateAverage()));
+           }
+        return srbn;
+
     }
     public String listStudentNames(){
+        StringBuilder nevsor = new StringBuilder();
 
-        return"1";
+        for(Student std: students){
+            nevsor = nevsor.append(std.getName()).append(", ");
+        }
+        nevsor.deleteCharAt(nevsor.length()-2);
+        return nevsor.toString().trim();
     }
 }

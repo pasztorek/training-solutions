@@ -15,7 +15,8 @@ public class StudyResultByName {
         return studentName;
     }
 
-    public double getStudyAverage() {
+    public double getStudyAverage()
+    {
         return studyAverage;
     }
 }
