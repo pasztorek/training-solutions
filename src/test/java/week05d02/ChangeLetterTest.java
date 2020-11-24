@@ -12,7 +12,7 @@ public class ChangeLetterTest {
     @Test
 public void test() {
 
-        assertEquals("*sfd**df", new ChangeLetter().changeVowels("usfdaidf"));
+        assertEquals("*sfd**df", new ChangeLetter().changeVowels("usfdAidf"));
 
 }
 
