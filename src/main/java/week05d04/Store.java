@@ -9,6 +9,5 @@ public class Store {
 
     public void addProduct(Product product){
         products.add(product);
-
     }
 }
