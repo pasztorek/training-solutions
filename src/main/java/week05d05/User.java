@@ -7,7 +7,7 @@ public class User {
     String email;
 
     public User(String firstName, String lastName, String email) {
-        if (email.contains("@") && email.contains(".")) {
+        if (email.contains("@") && email.contains("."))  {
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
