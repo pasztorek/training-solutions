@@ -2,9 +2,9 @@ package week05d05;
 
 public class User {
 
-    String firstName;
-    String lastName;
-    String email;
+    private String firstName;
+    private String lastName;
+    private String email;
 
     public User(String firstName, String lastName, String email) {
         if (email.contains("@") && email.contains("."))  {
