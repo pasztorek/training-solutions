@@ -14,7 +14,7 @@ public class Store {
         int counter=0;
 
         for(Product prod: products){
-            if(prod.category==category){
+            if(prod.getCategory()==category){
                 counter++;
             }
         }
