@@ -24,4 +24,11 @@ public class ListSelectorTest {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> new ListSelector().selector(null));
         assertEquals("Nincs lista!", ex.getMessage());
     }
+
+    @Test
+    public void test3(){
+        List<String> words =  Arrays.asList();
+        ListSelector select = new ListSelector();
+        assertEquals("", select.selector(words));
+    }
 }
