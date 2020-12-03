@@ -1,4 +1,4 @@
-package week06s03;
+package week06d03;
 
 public class WordEraser {
 
