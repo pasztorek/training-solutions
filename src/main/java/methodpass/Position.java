@@ -20,7 +20,7 @@ public class Position {
 
     public double distanceFrom(Position position){
 
-        return 1;
+        return Math.sqrt(Math.pow(this.posX - position.posX, 2) + Math.pow(this.posY - position.posY, 2));
     }
 
     public void moveTrooper(Trooper trooper, Position target){
