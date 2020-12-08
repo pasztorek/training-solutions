@@ -18,7 +18,7 @@ public class CreditCard {
     }
 
     private Currency currency;
-    private long balance;
+    private double balance;
 
     public CreditCard(long balance, Currency currency){
             this.balance=balance;
@@ -26,25 +26,42 @@ public class CreditCard {
     }
 
     public CreditCard(long balance){
+        if(currency==null){
+            this.currency=Currency.HUF;
+        }
+
             this.balance=balance;
     }
 
-    public long getBalance() {
+    public double getBalance() {
+        for(Rate rate: ACTUAL_RATES)
+            if(currency.toString().equals(rate.getCurrency().toString())){
+                balance = balance * rate.getConversionFactor();
+            }
         return balance;
     }
 
 
     public boolean payment(long amount, Currency currency){
+        double convertedAmount=0.0;
 
+        for(Rate rate: ACTUAL_RATES)
+            if(currency.toString().equals(rate.getCurrency().toString())){
+                 convertedAmount = amount * rate.getConversionFactor();
+            }
 
-
-        return true;
+        if(balance>=convertedAmount){
+            balance=balance-convertedAmount;
+                    return true;
+        }
+        return false;
     }
 
     public boolean payment(long amount){
-
-
-
-        return true;
+        if(balance>=amount){
+            balance = balance-amount;
+            return true;
+        }
+        return false;
     }
 }

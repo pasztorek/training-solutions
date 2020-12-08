@@ -15,6 +15,7 @@ public class Rate {
     }
 
     public double getConversionFactor() {
+
         return conversionFactor;
     }
 }
