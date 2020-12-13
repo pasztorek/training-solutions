@@ -6,18 +6,18 @@ public class Boss extends Employee {
     int NumberOfEmployees;
 
 
-    public Boss(String name, String address, double salary, double LEADERSHIP_FACTOR) {
+    public Boss(String name, String address, double salary, int numberOfEmployees) {
         super(name, address, salary);
-        this.LEADERSHIP_FACTOR = this.LEADERSHIP_FACTOR*LEADERSHIP_FACTOR;
+        NumberOfEmployees = numberOfEmployees;
     }
 
     public double getSalary() {
 
-        return salary + (salary*LEADERSHIP_FACTOR);
+        return salary + (salary*LEADERSHIP_FACTOR*getNumberOfEmployees());
     }
 
-    public double getNumberOfEmployees() {
-        return LEADERSHIP_FACTOR;
+    public int getNumberOfEmployees() {
+        return NumberOfEmployees;
     }
 
     @Override

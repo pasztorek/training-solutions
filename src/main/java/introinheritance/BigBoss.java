@@ -1,27 +1,28 @@
 package introinheritance;
 
-public class BigBoss {
+public class BigBoss extends Boss{
 
     double bonus;
 
 
-    public BigBoss(double bonus) {
+    public BigBoss(String name, String address, double salary, int numberOfEmployees, double bonus) {
+        super(name, address, salary, numberOfEmployees);
         this.bonus = bonus;
     }
 
     public int getNumberOfEmployees(){
 
-        return 1;
+        return this.NumberOfEmployees;
     }
 
     public double getBonus(){
 
-        return 1.0;
+        return this.bonus;
     }
 
     public double getSalary(){
 
-        return 1.0;
+        return super.getSalary() + bonus;
     }
 
 }
