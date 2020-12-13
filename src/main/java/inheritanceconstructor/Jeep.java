@@ -19,7 +19,11 @@ public class Jeep extends Car{
         if(!enoughFuelJeep(km)){
             throw new RuntimeException("Not enough fuel available!");
         }
-        //super.fuel=super.fuel-(fuelRate*(km/100));
+
+        super.modifyFuelAmount(extraFuel-(getFuelRate()*(km/100)));
+        if((extraFuel-(getFuelRate()*(km/100))<=0)){
+            extraFuel=0.0;
+        }
     }
 
 
@@ -37,6 +41,9 @@ public class Jeep extends Car{
     }
 
     public boolean enoughFuelJeep(int km){
-        return ((super.getFuel() + extraFuel) * super.getFuelRate() / 100) >= 0.0;
+        double a = super.getFuel()+extraFuel;
+        double b = super.getFuelRate()*(km/100);
+
+        return a>b;
     }
 }
