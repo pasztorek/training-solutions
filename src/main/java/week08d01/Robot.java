@@ -29,10 +29,4 @@ public class Robot {
     return position;
 
     }
-
-    public static void main(String[] args) {
-        Robot rbt = new Robot();
-        rbt.move("FFLLLLLBBBBJJJJJJJ");
-        System.out.println(rbt.position.toString());
-    }
 }
