@@ -1,7 +1,6 @@
-package week0802;
+package week08d02;
 
 import org.junit.Test;
-import week08d02.Lottery;
 
 public class LotteryTest {
 
