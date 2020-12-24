@@ -9,13 +9,8 @@ public class Person {
     Present present;
 
 
-    public void setPresent(){
-
-
-    }
-
     public Person(String name, int age) {
-        this(name, age, getRandomPresent());
+        this(name, age, setPresent());
 
     }
 
@@ -26,7 +21,7 @@ public class Person {
         this.present = present;
     }
 
-    public static  Present getRandomPresent(){
+    public static  Present setPresent(){
         Present present=null;
 
         Random rnd = new Random();
