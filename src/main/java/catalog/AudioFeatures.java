@@ -35,9 +35,21 @@ public class AudioFeatures implements Feature{
     }
 
     public AudioFeatures(String title, int lenght, List<String> performers) {
+
+        if(Validators.isBlank(title)){
+            throw new IllegalArgumentException();
+        }
         this.title = title;
+        if(lenght<=0){
+            throw new IllegalArgumentException();
+        }
         this.length = lenght;
+
+        if(Validators.isEmpty(performers)){
+            throw new IllegalArgumentException();
+        }
         this.performers = performers;
+
         this.composer = new ArrayList<>();
     }
 }
