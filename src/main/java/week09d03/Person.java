@@ -6,22 +6,15 @@ public class Person {
 
     private String name;
     private int age;
-    Present present;
+    Present present=null;
 
 
     public Person(String name, int age) {
-        this(name, age, setPresent());
-
+        this.name=name;
+        this.age=age;
     }
 
-    public Person(String name, int age, Present present) {
-
-        this.name = name;
-        this.age = age;
-        this.present = present;
-    }
-
-    public static  Present setPresent(){
+    public void setPresent(){
         Present present=null;
 
         Random rnd = new Random();
@@ -32,20 +25,21 @@ public class Person {
                 present=pres;
             }
         }
+        this.present=present;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Present getPresent() {
         return present;
     }
-
-    public static void main(String[] args) {
-        Person person = new Person("Jancsi", 10);
-        System.out.println(person.toString());
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", present=" + present +
-                '}';
-    }
-}
+
+
