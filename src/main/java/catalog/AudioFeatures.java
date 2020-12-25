@@ -1,5 +1,6 @@
 package catalog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AudioFeatures implements Feature{
@@ -11,12 +12,15 @@ public class AudioFeatures implements Feature{
 
     @Override
     public List<String> getContributors() {
-        return null;
+
+            List<String> result = new ArrayList<>(composer);
+            result.addAll(performers);
+            return result;
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return title;
     }
 
     public int getLength() {
@@ -34,5 +38,6 @@ public class AudioFeatures implements Feature{
         this.title = title;
         this.length = lenght;
         this.performers = performers;
+        this.composer = new ArrayList<>();
     }
 }
