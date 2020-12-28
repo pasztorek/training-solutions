@@ -1,7 +1,5 @@
 package catalog;
 
-import week08d03.StringLists;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -71,12 +69,6 @@ public class CatalogItem {
         }
         return false;
     }
-
-
-
-
-
-
 
     public CatalogItem(String registrationNumber, int price, Feature... feature) {
         this.registrationNumber = registrationNumber;
