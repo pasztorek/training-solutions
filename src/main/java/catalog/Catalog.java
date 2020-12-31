@@ -88,7 +88,21 @@ public class Catalog {
     }
 
     public List<CatalogItem> findByCriteria(SearchCriteria criteria){
+        List<CatalogItem> result = new ArrayList<>();
 
-        return null;
+        for(CatalogItem catitem: catalogItems){
+            if(catitem.getTitles().contains(criteria.getTitle())){
+                if(!result.contains(catitem)) {
+                     result.add(catitem);
+                }
+            }
+
+            if(catitem.getContributors().contains(criteria.getContributor())){
+                if(!result.contains(catitem)) {
+                    result.add(catitem);
+                }
+            }
+        }
+        return result;
     }
 }
