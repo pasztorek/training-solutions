@@ -27,7 +27,7 @@ public class Cv {
 
         for(String string: skills){
            level = Integer.parseInt(string.substring(string.length()-2,string.length()-1));
-           skill = string.substring(0,string.indexOf(" "));
+           skill = string.substring(0,string.indexOf("(")-1);
 
            this.skills.add(new Skill(skill,level));
         }
@@ -42,10 +42,6 @@ public class Cv {
             if(skill.getName().equals(skillFind)){
                 result=skill.getLevel();
             }
-        }
-
-        if(result==0){
-            throw new SkillNotFoundException();
         }
 
         return result;
