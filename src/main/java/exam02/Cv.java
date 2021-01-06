@@ -43,6 +43,9 @@ public class Cv {
                 result=skill.getLevel();
             }
         }
+        if(result==0){
+            throw new IllegalArgumentException();
+        }
 
         return result;
     }
