@@ -12,7 +12,6 @@ public class Calculator {
         int sum = 0;
         for(int i=0; i<4; i++){
             sum = sum+arr[i];
-
         }
         return sum;
     }
@@ -22,8 +21,5 @@ public class Calculator {
         Calculator calc = new Calculator();
         System.out.println(calc.findMinMaxSum(3,5,2,7,7,8,9,3,8));
 
-
     }
-
-
 }
