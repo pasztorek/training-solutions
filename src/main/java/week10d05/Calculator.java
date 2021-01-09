@@ -1,31 +1,26 @@
 package week10d05;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Calculator {
 
-    public int[] findMinMaxSum(int...arr){
-        int max=0;
+    public int findMinMaxSum(int...arr){
 
+        Arrays.sort(arr);
 
-        int[] res = arr.clone();
+        int sum = 0;
+        for(int i=0; i<4; i++){
+            sum = sum+arr[i];
 
-            for(int i=0; i<arr.length; i++){
-                for(int y = 0; y < arr.length; y++){
-                    if(arr[i] < arr[y]){
-                        max=arr[y];
-                    }
-                }
-                        arr[i]=0;
-            }
-
-
-
-        return null;
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
-        System.out.println("Kérek egy számor vagy (K)ilép");
+
         Calculator calc = new Calculator();
-        calc.findMinMaxSum(1,2,3,4,5);
+        System.out.println(calc.findMinMaxSum(3,5,2,7,7,8,9,3,8));
 
 
     }
