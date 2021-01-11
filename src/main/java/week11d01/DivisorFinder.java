@@ -5,14 +5,19 @@ public class DivisorFinder {
 
     public int findDivisors(int n){
         String numberTostring = Integer.toString(n);
-        int number=0;
+        int result=0;
+        int div;
 
         for(int i=0; i<numberTostring.length(); i++){
-            number = number + Integer.parseInt(numberTostring.substring(i,i+1));
+
+            div = Integer.parseInt(numberTostring.substring(i,i+1));
+                if(n%div==0){
+                    result++;
+            }
 
         }
 
-        return number;
+        return result;
     }
 
     public static void main(String[] args) {
