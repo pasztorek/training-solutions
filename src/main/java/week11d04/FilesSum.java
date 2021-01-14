@@ -9,18 +9,33 @@ public class FilesSum {
     public int sumNumbers(){
         StringBuilder path = new StringBuilder("number");
 
-        Path file = Path.of(path.toString());
         int sum=0;
 
-        try {
+        for(int i=0; i<100; i++) {
+            if(i<10){
+                path.append("0");
+                path.append(i);
+                path.append(".txt");
+            }
+            else {
+                path.append(i);
+                path.append(".txt");
+            }
 
-            String szam = Files.readString(file);
-            sum = Integer.parseInt(szam);
+            Path file = Path.of(path.toString());
 
-        }catch (IOException e){
-            throw new IllegalArgumentException("Nem tudom olvasni a fileokat");
+            if(Files.isRegularFile(file)){
+
+            try {
+                String szam = Files.readString(file);
+                sum = sum + Integer.parseInt(szam);
+
+            } catch (IOException e) {
+                throw new IllegalArgumentException("Nem tudom olvasni a fileokat");
+            }
+            }
+            path = new StringBuilder("number");
         }
-
         return sum;
     }
 
