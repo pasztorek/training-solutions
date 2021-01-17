@@ -2,19 +2,24 @@ package activity;
 
 public class Coordinate {
 
-private long latitude;
-private long longitude;
+private double latitude;
+private double longitude;
 
-    public Coordinate(long latitude, long longitude) {
+    public Coordinate(double latitude, double longitude) {
+        if(latitude<-90 || latitude> 90 || longitude < -180 || longitude> 180){
+            throw new IllegalArgumentException("");
+        }
+
+
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 }
