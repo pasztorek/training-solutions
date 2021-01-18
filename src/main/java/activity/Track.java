@@ -7,7 +7,7 @@ public class Track {
 
     private List<TrackPoint> trackPoints = new ArrayList<>();
 
-    public Coordinate finMinimumCoordinate(){
+    public Coordinate findMinimumCoordinate(){
 
         if(trackPoints.isEmpty()) {
             throw new IllegalStateException("No points");
@@ -51,8 +51,8 @@ public class Track {
 
     public double  getRectangleArea(){
 
-         double lat = findMaximumCoordinate().getLatitude()-finMinimumCoordinate().getLongitude();
-         double lon = findMaximumCoordinate().getLongitude()-finMinimumCoordinate().getLongitude();
+         double lat = findMaximumCoordinate().getLatitude()-findMinimumCoordinate().getLatitude();
+         double lon = findMaximumCoordinate().getLongitude()-findMinimumCoordinate().getLongitude();
 
          return lat*lon;
     }
@@ -74,7 +74,7 @@ public class Track {
 
         for (int i=0; i<trackPoints.size()-1; i++){
             if(trackPoints.get(i+1).getElevation() < trackPoints.get(i).getElevation()){
-                sum = sum + trackPoints.get(i+1).getElevation()-trackPoints.get(i).getElevation();
+                sum = sum + trackPoints.get(i).getElevation()-trackPoints.get(i+1).getElevation();
             }
 
         }
