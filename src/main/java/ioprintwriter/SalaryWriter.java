@@ -17,14 +17,12 @@ public class SalaryWriter {
 
         try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(fileName))) {
 
-            for (String srt : names) {
-                String title = "";
+        for(String srt: names){
+            String title = "";
 
-                if (srt.contains(".")) {
-                    title = srt.substring(0, srt.indexOf("."));
-                }
-
-
+            if(srt.contains(".")) {
+                title = srt.substring(0, srt.indexOf("."));
+            }
                 if (title.equals("Dr")) {
                     pw.print(srt);
                     pw.print(": ");
@@ -34,19 +32,17 @@ public class SalaryWriter {
                     pw.print(srt);
                     pw.print(": ");
                     pw.println(200_000);
-                } else {
+                }
+
+                else {
                     pw.print(srt);
                     pw.print(": ");
                     pw.println(100_000);
-                }
             }
+                    }
         }
                 catch (IOException ioe) {
                 throw new IllegalStateException();
                }
-
-
         }
-
-
 }
