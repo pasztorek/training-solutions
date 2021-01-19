@@ -26,18 +26,25 @@ public class SalaryWriter {
             try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(fileName))) {
 
                 if (title.equals("Dr")) {
-                    pw.write(srt + ":" + 500_000);
+                    pw.print(srt);
+                    pw.print(": ");
+                    pw.println(500_000);
+
                 } else if (title.equals("Mr") || title.equals("Mrs")) {
-                    pw.write(srt + ":" + 200_000);
+                    pw.print(srt);
+                    pw.print(": ");
+                    pw.println(200_000);
                 }
 
-            else {
-                pw.write(srt + ":" + 100_000);
+                else {
+                    pw.print(srt);
+                    pw.print(": ");
+                    pw.println(100_000);
             }
                     }
 
                 catch (IOException ioe) {
-                throw new IllegalArgumentException();
+                throw new IllegalStateException();
                }
             }
 
