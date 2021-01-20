@@ -18,7 +18,7 @@ public class NumberStat {
         }
 
         for (int i = 0; i < numbers.size() - 1; i++) {
-            if (numbers.get(i) !=0 && numbers.get(i-1)!=0) {
+            if (numbers.get(i+1) !=0 && numbers.get(i)!=0) {
                 return numbers.get(i);
             }
         }
