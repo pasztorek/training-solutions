@@ -4,24 +4,22 @@ import java.util.Comparator;
 import java.util.List;
 
 public class NumberStat {
-    int counter=0;
+    int counter = 0;
 
     public int getNumber(List<Integer> numbers) {
-
+        int temp = 0;
+        int prev = 0;
         numbers.sort(Comparator.naturalOrder());
 
         for (int i = 0; i < numbers.size() - 1; i++) {
-            if (numbers.get(i) == numbers.get(i + 1)) {
-                numbers.set(i, 0);
+            temp = numbers.get(i);
+            numbers.set(i, 0);
 
+            if(!(numbers.contains(temp)) && (temp!=prev)){
+                return temp;
             }
-        }
-
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            if (numbers.get(i+1) !=0 && numbers.get(i)!=0) {
-                return numbers.get(i);
-            }
+            prev= temp;
         }
             return 0;
-        }
-   }
+    }
+}
