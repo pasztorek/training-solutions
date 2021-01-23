@@ -14,11 +14,8 @@ public class IndexCounter {
         try (BufferedReader reader = Files.newBufferedReader(index)) {
             String line;
 
-
-
             while((line = reader.readLine()) != null) {
-                //System.out.println(line);
-                if(line.toLowerCase().contains("koronavírus") || line.toLowerCase().contains("koronavirus")){
+                       if(line.toLowerCase().contains("koronavírus") || line.toLowerCase().contains("koronavirus")){
                     counter++;
                 }
             }
@@ -28,10 +25,8 @@ public class IndexCounter {
         }
         return counter;
     }
-
     public static void main(String[] args) {
         IndexCounter ic = new IndexCounter();
         System.out.println(ic.getNumber());
     }
-
 }
