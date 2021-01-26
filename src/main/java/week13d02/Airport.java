@@ -55,11 +55,25 @@ public class Airport {
         return null;
     }
 
+
+    public List<String> getTownInDirection(String town, String direction) {
+            List<String> result = new ArrayList<>();
+
+        for (String str : Schedule) {
+            String[] flight = str.split(" ");
+            if (flight[2].equals(town) && flight[1].equals(direction)) {
+                result.add(str);
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Airport ap = new Airport();
         ap.readSchedule();
         System.out.println(ap.getMostDirection());
         System.out.println(ap.getPlane("CX8486"));
+        System.out.println(ap.getTownInDirection("Brussels", "Arrival").toString());
     }
 
 }
