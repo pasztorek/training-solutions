@@ -15,7 +15,7 @@ public class Airport {
 
         String line="";
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getTown.class.getResourceAsStream("/cities.txt")))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getTown.class.getResourceAsStream("/beosztas.txt")))){
 
             while((line = reader.readLine()) != null) {
                 Schedule.add(line);
