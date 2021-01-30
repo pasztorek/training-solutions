@@ -1,14 +1,14 @@
 package week13d05;
 
-public class WorldChecker {
+public class WordChecker {
 
 
-    public int counter(String world){
+    public int counter(String word){
         String alphabet="abcdefghijklmnopqrstuvwxyz";
         int counter =0;
         for(int i=0; i<alphabet.length(); i++) {
 
-            if (world.toLowerCase().contains(alphabet.substring(i, i + 1))) {
+            if (word.toLowerCase().contains(alphabet.substring(i, i + 1))) {
                 alphabet = alphabet.replace(alphabet.substring(i, i + 1), "0");
                 counter++;
             }
@@ -17,7 +17,7 @@ public class WorldChecker {
     }
 
     public static void main(String[] args) {
-        WorldChecker wc = new WorldChecker();
+        WordChecker wc = new WordChecker();
         System.out.println((wc.counter("elegemvan")));
     }
 
