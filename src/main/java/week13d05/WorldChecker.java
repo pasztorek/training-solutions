@@ -8,7 +8,7 @@ public class WorldChecker {
         int counter =0;
         for(int i=0; i<alphabet.length(); i++) {
 
-            if (world.contains(alphabet.substring(i, i + 1))) {
+            if (world.toLowerCase().contains(alphabet.substring(i, i + 1))) {
                 alphabet = alphabet.replace(alphabet.substring(i, i + 1), "0");
                 counter++;
             }
