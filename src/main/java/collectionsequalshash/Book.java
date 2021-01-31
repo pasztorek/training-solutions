@@ -1,5 +1,7 @@
 package collectionsequalshash;
 
+import java.util.Objects;
+
 public class Book {
 
     private String RegNumber;
@@ -27,5 +29,28 @@ public class Book {
 
     public String getAuthor() {
         return Author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return title.equals(book.title) &&
+                Author.equals(book.Author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, Author);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "regNumber='" + RegNumber + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + Author + '\'' +
+                '}';
     }
 }
