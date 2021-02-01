@@ -33,10 +33,4 @@ public class LogParser {
         result.put(line[0], entries);
         return result;
     }
-
-    public static void main(String[] args) {
-        LogParser lp = new LogParser();
-        lp.parseLog("176.121.45.124:2016-12-02:derzsi\n"
-                + "176.121.45.124:2016-12-03:ggrrrr\n");
-    }
-}
+ }
