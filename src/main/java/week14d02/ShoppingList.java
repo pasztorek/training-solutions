@@ -44,11 +44,12 @@ public class ShoppingList {
         }
      }
 
-    public String listByCode (String code){
+    public List <String> listByCode (String code){
         List<String> result = new ArrayList<>();
         result = mappedList.get(code);
+        Collections.sort(result);
 
-        return result.toString();
+        return result;
     }
 
     public static void main(String[] args) {
