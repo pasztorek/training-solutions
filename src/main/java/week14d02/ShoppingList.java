@@ -12,8 +12,6 @@ public class ShoppingList {
     List<String>  shoppinglist = new ArrayList<>();
     Map<String, List<String>> mappedList = new HashMap<>();
 
-
-
     public void readFile(){
 
         String line="";
@@ -41,7 +39,8 @@ public class ShoppingList {
             for(String good: goods){
                 mapGoods.add(good);
             }
-            mappedList.put(mapKey, mapGoods);
+            mappedList.put(mapKey, new ArrayList<>(mapGoods));
+            mapGoods.clear();
         }
      }
 
@@ -56,7 +55,7 @@ public class ShoppingList {
         ShoppingList sh = new ShoppingList();
         sh.readFile();
         sh.mapping();
-        System.out.println(sh.listByCode("A233"));
+        System.out.println(sh.listByCode("C123"));
     }
 
 }
