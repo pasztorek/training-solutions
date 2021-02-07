@@ -1,6 +1,6 @@
 package collectionscomp;
 
-public class Book {
+public class Book implements Comparable<Book>{
 
     private int RegNumber;
     private String title;
@@ -22,5 +22,11 @@ public class Book {
 
     public String getAuthor() {
         return Author;
+    }
+
+
+    @Override
+    public int compareTo(Book o) {
+        return this.title.compareTo(o.title);
     }
 }
