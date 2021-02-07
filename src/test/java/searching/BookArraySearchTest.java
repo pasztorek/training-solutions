@@ -76,11 +76,11 @@ public class BookArraySearchTest {
         Book[] bookArray = new Book[bookList.size()];
         BookArraySearch bas = new BookArraySearch(bookList.toArray(bookArray));
         //When
-        Book book = bas.findBookByAuthorTitle("Fazekas Anna", "Mackó, mókus, malacka");
+        Book book = bas.findBookByAuthorTitle("Fazekas Anna", "Mackó, Mókus, Malacka");
         //Then
         assertEquals(1010, book.getId());
         assertEquals("Fazekas Anna", book.getAuthor());
-        assertEquals("Mackó, mókus, malacka", book.getTitle());
-        assertEquals("1010 Fazekas Anna Mackó, mókus, malacka", book.toString());
+        assertEquals("Mackó, Mókus, Malacka", book.getTitle());
+        assertEquals("1010 Fazekas Anna Mackó, Mókus, Malacka", book.toString());
     }
 }

@@ -1,13 +1,20 @@
 package searching;
 
-public class Book {
+import java.util.Objects;
+
+public class Book implements Comparable<Book> {
 
     private int id;
     private String title;
     private String author;
 
-    public Book(int id, String title, String author) {
+    public Book(int id, String author, String title) {
         this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+
+    public Book(String author, String title) {
         this.title = title;
         this.author = author;
     }
@@ -22,5 +29,17 @@ public class Book {
 
     public String getAuthor() {
         return author;
+    }
+
+    @Override
+    public int compareTo(Book o) {
+
+            return author.compareTo(o.author);
+
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + author + " " + title;
     }
 }
