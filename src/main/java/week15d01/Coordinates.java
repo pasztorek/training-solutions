@@ -6,6 +6,11 @@ public class Coordinates {
 
     Map<Integer, Integer> coordinates;
 
+    public Map<Integer, Integer> max(){
+
+        return null;
+    }
+
 
     public static void main(String[] args) {
         Coordinates cor = new Coordinates();
