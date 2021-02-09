@@ -5,10 +5,7 @@ import week13d03.Teachers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Quiz {
@@ -40,8 +37,6 @@ public class Quiz {
             i++;
         }
 
-
-
         }
 
     public List<String> topics (String object){
@@ -59,11 +54,36 @@ public class Quiz {
     return result;
     }
 
+    public String random (){
+        Random rnd = new Random();
+        int number = rnd.nextInt(questions.size());
+        return questions.get(number)+": "+questions.get(number+1);
+    }
+
+    public Map<String, Integer> order(){
+        Map<String, Integer> result = new HashMap<>();
+
+        for(Map.Entry<String, String[]> map: question.entrySet()){
+            String[] value = map.getValue();
+            int point = Integer.parseInt(value[1]);
+            if(result.keySet().contains(value[2])) {
+                result.put(value[2], Integer.parseInt(value[1]) + point);
+            }
+            result.put(value[2], Integer.parseInt(value[1]));
+
+        }
+
+
+        return result;
+    }
+
     public static void main(String[] args) {
         Quiz q = new Quiz();
         q.readFile();
         q.fillMap();
         q.topics("tortenelem");
+        System.out.println(q.random());
+        q.order();
 
     }
 }
