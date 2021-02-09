@@ -1,14 +1,24 @@
 package week15d01;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Coordinates {
 
-    Map<Integer, Integer> coordinates;
+    Map<Integer, Integer> coordinates = new HashMap<>();
+    Integer max=0;
+    Map.Entry<Integer, Integer> result = null;
 
-    public Map<Integer, Integer> max(){
+    public Map.Entry<Integer, Integer> max(){
+        for(Map.Entry<Integer, Integer> map : coordinates.entrySet()){
+            if (map.getValue() > max){
+                max=map.getValue();
+                result=map;
 
-        return null;
+            }
+        }
+
+        return result;
     }
 
 
@@ -22,6 +32,8 @@ public class Coordinates {
         cor.coordinates.put(5,5);
         cor.coordinates.put(6,6);
         cor.coordinates.put(7,7);
+
+        System.out.println(cor.max());
     }
 
 }
