@@ -10,6 +10,13 @@ public class PostFinder {
 
     public List<Post> findPostsFor(String user){
 
+        for(Post post: posts){
+            if(!(post.getTitle().isEmpty() || post.getContent().isEmpty())){
+
+            }
+
+        }
+
 
 
        return null;
@@ -20,12 +27,17 @@ public class PostFinder {
     }
 
     public static void main(String[] args) {
-        Post po1 = new Post("Nem tudom", LocalDate.of(2021, 02,8), "Szia", "Gabi");
-        Post po2 = new Post("Jól van", LocalDate.of(2021, 02,9), "Hi", "Kati");
-        Post po3 = new Post("Nem érdekel", LocalDate.of(2021, 02,10), "Csao", "Réka");
-        Post po4 = new Post("Unom", LocalDate.of(2021, 02,11), "Hello", "Tibi");
-        Post po5 = new Post("Viszlát", LocalDate.of(2021, 02,12), "Morgen", "Szandi");
 
+        List<Post> mails = new ArrayList<>();
+
+        mails.add(new Post("Nem tudom", LocalDate.of(2021, 02,8), "Szia", "Gabi"));
+        mails.add(new Post("Jól van", LocalDate.of(2021, 02,9), "Hi", "Kati"));
+        mails.add(new Post("Nem érdekel", LocalDate.of(2021, 02,10), "Csao", "Réka"));
+        mails.add(new Post("Unom", LocalDate.of(2021, 02,11), "Hello", "Tibi"));
+        mails.add(new Post("Viszlát", LocalDate.of(2021, 02,12), "Morgen", "Szandi"));
+        mails.add(new Post("", LocalDate.of(2021, 02,12), "Morgen", "Szandi"));
+
+        PostFinder pf = new PostFinder(mails);
     }
 
 }
