@@ -2,6 +2,7 @@ package properties;
 
 import java.io.IOException;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Properties;
 
@@ -22,7 +23,7 @@ public class DatabaseConfiguration {
                 prop.load(reader);
 
         } catch (IOException ioe) {
-            throw new RuntimeException("Cannot read file from classpath", ioe);
+            throw new IllegalArgumentException("Cannot read file", ioe);
         }
 
     }
