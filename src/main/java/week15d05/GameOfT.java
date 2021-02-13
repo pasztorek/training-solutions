@@ -17,17 +17,20 @@ public class GameOfT {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameOfT.class.getResourceAsStream(file)))){
             String line;
             String[] battle;
+            reader.readLine();
 
             while((line = reader.readLine()) != null) {
                 battle = line.split(",");
 
                 for(int i=5; i<13; i++){
-                    System.out.println(battle[i]);
+                    if(battle[i]!="" && (numOfBattles.containsKey(battle[i]))) {
+                        numOfBattles.put(battle[i], (numOfBattles.get(battle[i])+1));
+                    }
 
-
+                    else {
+                        numOfBattles.put(battle[i], 1);
+                    }
                 }
-
-
             }
         }
 
@@ -36,8 +39,26 @@ public class GameOfT {
         }
     }
 
+    public String mostBattled(){
+        String result="";
+        Integer max=0;
+
+        for(Map.Entry<String, Integer> battle: numOfBattles.entrySet()){
+
+            if(battle.getValue()>max){
+
+                max=battle.getValue();
+                result=battle.getKey();
+            }
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
         GameOfT got = new GameOfT();
         got.readFile("/battles.csv");
+        System.out.println(got.mostBattled());
+
     }
 }
