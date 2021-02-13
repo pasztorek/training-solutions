@@ -2,8 +2,6 @@ package properties;
 
 import java.io.IOException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Properties;
 
 
@@ -19,7 +17,6 @@ public class DatabaseConfiguration {
         try (
 
                 FileInputStream reader = new FileInputStream(path)){
-
                 prop.load(reader);
 
         } catch (IOException ioe) {
