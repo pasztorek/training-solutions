@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Covid19 {
-    Map<String, Double> filtered = new HashMap<>();
-    Map<String, Double> ordered = new LinkedHashMap<>();
+    Map<String, Integer> filtered = new HashMap<>();
+    Map<String, Integer> ordered = new LinkedHashMap<>();
 
     public void readFile(String file){
 
@@ -17,13 +17,16 @@ public class Covid19 {
             while((line = reader.readLine()) != null) {
 
                 String week;
-                double cases;
+                int cases;
+                String[] data;
 
                 if (line.contains("Hungary")) {
-                    week = line.substring(line.indexOf('-') + 1, line.indexOf('-') + 3);
+                    data = line.split(",");
+                    week = data[1];
+
 
                     if(!line.substring(line.indexOf("e,")+2, line.length()).isEmpty()){
-                        cases = Double.parseDouble(line.substring(line.indexOf("e,")+2, line.length()));
+                        cases = Integer.parseInt(data[2]);
                         filtered.put(week,cases);
                     }
 
@@ -36,13 +39,13 @@ public class Covid19 {
         }
     }
 
-    public Map<String, Double> ordering(){
-        Map.Entry<String, Double> maximum = null;
-        Double max = 0.0;
+    public Map<String, Integer> ordering(){
+        Map.Entry<String, Integer> maximum = null;
+        int max = 0;
 
 
         for(int i=0; i<3; i++){
-        for(Map.Entry<String, Double> entry: filtered.entrySet()) {
+        for(Map.Entry<String, Integer> entry: filtered.entrySet()) {
 
             if (entry.getValue() > max) {
                 max= entry.getValue();
@@ -53,7 +56,7 @@ public class Covid19 {
             }
             ordered.put(maximum.getKey(), maximum.getValue());
             filtered.remove(maximum.getKey());
-            max =0.0;
+            max =0;
         }
 
         return ordered;
