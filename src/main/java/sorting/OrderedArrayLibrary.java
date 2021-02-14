@@ -1,5 +1,7 @@
 package sorting;
 
+import java.util.Arrays;
+
 public class OrderedArrayLibrary {
 
     private Book[] bookArray;
@@ -9,13 +11,33 @@ public class OrderedArrayLibrary {
     }
 
     public Book[] sortingById(){
+        Arrays.sort(bookArray);
 
-        return null;
+        return bookArray;
     }
 
 
     public Book[] sortingByTitle(){
+        Comp co = new Comp(bookArray);
 
-        return null;
+
+        return bookArray;
+    }
+
+
+
+    class Comp implements Comparable<Book> {
+        private Book[] bookArray;
+
+        public Comp(Book[] bookArray) {
+            this.bookArray = bookArray;
+        }
+
+
+        @Override
+        public int compareTo(Book o) {
+            return 0;
+        }
     }
 }
+
