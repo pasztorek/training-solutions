@@ -13,3 +13,4 @@ public class PassengerTest {
         assertEquals(CruiseClass.LUXURY, passenger.getCruiseClass());
     }
 }
+

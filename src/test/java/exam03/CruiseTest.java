@@ -60,6 +60,7 @@ public class CruiseTest {
         assertEquals("Jack Doe", passenger.getName());
     }
 
+
     @Test
     void getPassengerNamesOrdered() {
         cruise.bookPassenger(new Passenger("Jack Smith", CruiseClass.FIRST));
@@ -90,4 +91,8 @@ public class CruiseTest {
         assertEquals(Map.of(CruiseClass.LUXURY, 2 , CruiseClass.FIRST, 1), result);
     }
 
+
+
 }
+
+
