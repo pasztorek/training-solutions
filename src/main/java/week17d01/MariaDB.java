@@ -32,5 +32,7 @@ public class MariaDB {
         catch (SQLException ee){
             throw new IllegalStateException("Nem jó", ee);
         }
+
+
     }
 }
