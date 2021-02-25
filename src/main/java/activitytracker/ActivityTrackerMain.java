@@ -97,8 +97,6 @@ public class ActivityTrackerMain {
 
             }
 
-            //Activity act = new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type")));
-
                } catch (SQLException se) {
             throw new IllegalArgumentException("Nincs eredmény.", se);
         }
