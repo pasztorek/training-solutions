@@ -37,21 +37,26 @@ public class ActivityTrackerMain {
         }
 
         ActivityTrackerMain atm = new ActivityTrackerMain();
-        atm.insertData(dataSource);
-    }
-
-    public void insertData(DataSource ds){
 
         Activity act1 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Hegymászás", ActivityType.HIKING);
-       // Activity act2 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Futás", ActivityType.RUNNING);
-       // Activity act3 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Bicajozás", ActivityType.BIKING);
+        Activity act2 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Futás", ActivityType.RUNNING);
+        Activity act3 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Bicajozás", ActivityType.BIKING);
+
+        atm.insertData(dataSource, act1);
+        atm.insertData(dataSource, act2);
+        atm.insertData(dataSource, act3);
+    }
+
+    public void insertData(DataSource ds, Activity act){
+
+
 
         try(
         Connection conn = ds.getConnection()){
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO activities (start_time, activity_type, activity_desc) values(?,?,?)");
-            stmt.setTimestamp(1, Timestamp.valueOf(act1.getStartTime()));
-            stmt.setString(2, act1.getType().toString());
-            stmt.setString(3, act1.getDesc());
+            stmt.setTimestamp(1, Timestamp.valueOf(act.getStartTime()));
+            stmt.setString(2, act.getType().toString());
+            stmt.setString(3, act.getDesc());
             stmt.executeUpdate();
 
 
