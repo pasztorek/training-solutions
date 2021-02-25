@@ -3,11 +3,10 @@ package activitytracker;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityTrackerMain {
 
@@ -33,7 +32,7 @@ public class ActivityTrackerMain {
             
         }
         catch (SQLException ee){
-            throw new IllegalStateException("Nem jó", ee);
+            throw new IllegalStateException("Nem tudok kapcsolódni az adatbázishoz.", ee);
         }
 
         ActivityTrackerMain atm = new ActivityTrackerMain();
@@ -45,11 +44,14 @@ public class ActivityTrackerMain {
         atm.insertData(dataSource, act1);
         atm.insertData(dataSource, act2);
         atm.insertData(dataSource, act3);
+
+        atm.findById(dataSource, 9L);
+
+        atm.getAllRecors(dataSource);
+
     }
 
     public void insertData(DataSource ds, Activity act){
-
-
 
         try(
         Connection conn = ds.getConnection()){
@@ -61,9 +63,47 @@ public class ActivityTrackerMain {
 
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException(" Nem jó...", se);
+            throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
+        }
+    }
+    public String findById(DataSource ds, Long id){
+
+        try(
+        Connection conn = ds.getConnection()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM activities WHERE ID ='10'");
+            rs.next();
+
+            Activity act = new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type")));
+
+            return act.toString();
+
+        } catch (SQLException se) {
+            throw new IllegalArgumentException("Nincs eredmény.", se);
         }
 
+    }
+
+    public List<Activity> getAllRecors(DataSource ds){
+        List<Activity> result = new ArrayList<>();
+
+        try(
+                Connection conn = ds.getConnection()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM activities");
+
+            while (rs.next() ){
+                result.add(new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type"))));
+
+            }
+
+            //Activity act = new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type")));
+
+               } catch (SQLException se) {
+            throw new IllegalArgumentException("Nincs eredmény.", se);
+        }
+
+        return result;
     }
 
 }
