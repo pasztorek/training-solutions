@@ -1,60 +1,22 @@
 package activitytracker;
 
-import org.mariadb.jdbc.MariaDbDataSource;
-
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityTrackerMain {
+public class ActivityDao {
 
+    private DataSource ds;
 
-    public static void main(String[] args) {
-
-        MariaDbDataSource dataSource = new MariaDbDataSource();
-
-        try {
-            dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
-            dataSource.setUser("activitytracker");
-            dataSource.setPassword("activitytracker");
-
-        }
-
-        catch (SQLException se) {
-            throw new IllegalStateException("Can not create data source", se);
-        }
-        try
-                (Connection conn = dataSource.getConnection())
-        {
-
-            
-        }
-        catch (SQLException ee){
-            throw new IllegalStateException("Nem tudok kapcsolódni az adatbázishoz.", ee);
-        }
-
-        Activity act1 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Hegymászás", ActivityType.HIKING);
-        Activity act2 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Futás", ActivityType.RUNNING);
-        Activity act3 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Bicajozás", ActivityType.BIKING);
-
-        ActivityDao adao = new ActivityDao(dataSource);
-
-        adao.insertData(act1);
-        adao.insertData(act2);
-        adao.insertData(act3);
-
-        adao.findById(9L);
-
-        adao.getAllRecors();
-
+    public ActivityDao(DataSource ds) {
+        this.ds = ds;
     }
 
-    public void insertData(DataSource ds, Activity act){
+    public void insertData(Activity act){
 
         try(
-        Connection conn = ds.getConnection()){
+                Connection conn = ds.getConnection()){
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO activities (start_time, activity_type, activity_desc) values(?,?,?)");
             stmt.setTimestamp(1, Timestamp.valueOf(act.getStartTime()));
             stmt.setString(2, act.getType().toString());
@@ -66,10 +28,10 @@ public class ActivityTrackerMain {
             throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
     }
-    public String findById(DataSource ds, Long id){
+    public String findById(Long id){
 
         try(
-        Connection conn = ds.getConnection()){
+                Connection conn = ds.getConnection()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM activities WHERE ID ='10'");
             rs.next();
@@ -84,7 +46,7 @@ public class ActivityTrackerMain {
 
     }
 
-    public List<Activity> getAllRecors(DataSource ds){
+    public List<Activity> getAllRecors(){
         List<Activity> result = new ArrayList<>();
 
         try(
@@ -97,11 +59,10 @@ public class ActivityTrackerMain {
 
             }
 
-               } catch (SQLException se) {
+        } catch (SQLException se) {
             throw new IllegalArgumentException("Nincs eredmény.", se);
         }
 
         return result;
     }
-
 }
