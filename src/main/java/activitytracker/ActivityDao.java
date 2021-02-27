@@ -28,12 +28,14 @@ public class ActivityDao {
             throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
     }
+
     public String findById(Long id){
 
         try(
                 Connection conn = ds.getConnection()){
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM activities WHERE ID ='10'");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM activities WHERE ID =?");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
             rs.next();
 
             Activity act = new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type")));
