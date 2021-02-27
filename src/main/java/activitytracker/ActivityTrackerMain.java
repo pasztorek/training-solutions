@@ -1,5 +1,6 @@
 package activitytracker;
 
+import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import javax.sql.DataSource;
@@ -35,6 +36,11 @@ public class ActivityTrackerMain {
             throw new IllegalStateException("Nem tudok kapcsolódni az adatbázishoz.", ee);
         }
 
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+
+        flyway.clean();
+        flyway.migrate();
+
         Activity act1 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Hegymászás", ActivityType.HIKING);
         Activity act2 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Futás", ActivityType.RUNNING);
         Activity act3 = new Activity(LocalDateTime.of(2021,02, 01,10,10), "Bicajozás", ActivityType.BIKING);
@@ -46,7 +52,6 @@ public class ActivityTrackerMain {
         adao.insertData(act3);
 
         adao.findById(9L);
-
         adao.getAllRecors();
 
     }

@@ -1,9 +1,11 @@
 package week10d02;
 
-import org.junit.Test;
+
 
 import java.util.List;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MaxTravelTest {
 

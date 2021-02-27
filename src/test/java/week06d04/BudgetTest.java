@@ -1,7 +1,9 @@
 package week06d04;
 
-import org.junit.Test;
+
 import week06d03.WordEraser;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

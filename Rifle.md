@@ -1,14 +1,11 @@
-# Main
+Main
 
-```java
 public static void main(String[] args) {
 
 }
-```
 
-# Értékek beolvasása
+Értékek beolvasása
 
-```java
 Scanner scanner = new Scanner(System.in);
 
 System.out.println("What's your name?");
@@ -16,61 +13,44 @@ String name = scanner.nextLine();
 
 System.out.println("What's your year of birth?");
 int yearOfBirth = scanner.nextInt();
-```
 
-Vigyázz a `nextInt()` metódussal, mert az nem olvassa
-be a sorvége jelet, és a következő `nextLine()`
-nem fog működni.
+Vigyázz a nextInt() metódussal, mert az nem olvassa be a sorvége jelet, és a következő nextLine() nem fog működni.
 
-```java
 int age = scanner.nextInt();
 scanner.nextLine(); //Ez fogja az ottmaradt sorvége jelet beolvasni
         
 String name = scanner.nextLine();
-```
 
-Helyette jobb lehet a következő (`NumberFormatException` kivételt dob, ha nem szám):
+Helyette jobb lehet a következő (NumberFormatException kivételt dob, ha nem szám):
 
-```java
 String line = scanner.nextLine();
 int age = Integer.parseInt(line); // Exception-t 
-```
 
-# UML
+UML
 
-![UML példa osztálydiagram](uml-demo.png)
+UML példa osztálydiagram
+Számok
 
-# Számok
-
-```java
 boolean even = i % 2 == 0; // Páros?
 
 double quotient = 10 / 4; // 2.0 - egészosztás
-```
 
-# Típuskényszerítés, autoboxing, String műveletek
+Típuskényszerítés, autoboxing, String műveletek
 
-```java
 double d = 12;         // int -> double implicit
 int i = (int) 3.14; // double -> int kényszerítéssel, értéke 3
-```
 
-```java
 Integer i = 12; // int -> Integer autoboxing
 int j = i; // Integer -> int autoboxing
-```
 
-```java
 int i = Integer.parseInt("12"); // Parse
 double d = Double.parseDouble("12.1") // Parse
 
 String si = Integer.toString(12); // toString
 String di = Double.toString(d); // toString
-```
 
-# Stringműveletek
+Stringműveletek
 
-```java
 boolean eq = name.equals(anotherName);                // Egyenlőségvizsgálat
 
 String fruit = "Apple";
@@ -89,81 +69,62 @@ boolean startsWith = fruit.startsWith("app");         // true
 boolean endWith = fruit.endsWith("le");               // true
 boolean containsDoubleP = fruit.contains("pp");       // true
 String part = fruit.substring(0, 2).toLowerCase();    // ap - összefűzhetők
-```
 
 Daraboljunk!
 
-```java
 String s = "John;1980";
 String[] parts = s.split(";"); // ; a separator karakter
 String name = parts[0];
 int yearOfBirth = Integer.parseInt(parts[1]);
-```
 
 Járjuk be karakterenként!
 
-```java
 String s = "abcd";
 for (char c: s.toCharArray()) {
     System.out.println(Character.isLetter(c));
 }
-```
 
 Hosszú string összefűzése:
 
-```java
 StringBuilder sb = new StringBuilder();
 for (int i = 0; i < 10; i++) {
     sb.append(i).append(" * ").append(i).append(" = ").append(i * i);
 }
-```
 
 Formázás:
 
-```java
 String formatted = String.format("Name: %s, year of birth: %d", employee.getName(), employee.getYearOfBirth());
     // Name: John Doe, year of birth: 1980
 
 // Vagy azonnal kiírva:
 System.out.printf("Name: %s, year of birth: %d", employee.getName(), employee.getYearOfBirth());
-```
 
-# Dátumok
+Dátumok
 
-```java
 LocalDate fromDate = LocalDate.of(2015, Month.JANUARY, 30);
 
 LocalDateTime fromDateTime = LocalDateTime.of(2015, 1, 20, 10, 15);
-```
 
-# Ciklusok
+Ciklusok
 
-Klasszikus for ciklus. Csak akkor használjuk ezt, ha
-szükségünk van a ciklusváltozóra.
+Klasszikus for ciklus. Csak akkor használjuk ezt, ha szükségünk van a ciklusváltozóra.
 
-```java
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
 }
-```
 
 Un. for-each ciklus, használjuk mindig ezt, ha lehet!
 
-```java
 List<String> names = List.of("John Doe", "Jack Doe");
 
 for (String name: names) {
     System.out.println(name);
 }
-```
 
-# Tömbök
+Tömbök
 
-Lehetőleg kerüljük, helyette használjunk listát!
-Néhány helyen elkerülhetetlen, pl. varargs, 
-`split()` vagy ha a feladat így kéri.
+Lehetőleg kerüljük, helyette használjunk listát! Néhány helyen elkerülhetetlen, pl. varargs, split() vagy ha a feladat így kéri.
 
-```java
 int[] numbers = new int[10];
 
 int[] names = new String[]{"John", "Jack"};
@@ -173,11 +134,9 @@ int length = names.length;
 for (String name: names) {
     System.out.println(name);
 }
-```
 
-# Listák
+Listák
 
-```java
 List<String> names = List.of("John", "Jack"); // Módosíthatatlan lista
 
 List<String> moreNumbers = new ArrayList<>(); // Módosítható lista, diamond operátor, primitív típus nem lehet
@@ -196,26 +155,30 @@ int indexOfJane = names.indexOf("Jane") // 1 - 1. indexen
 for(String name: names){
     System.out.println(name);
 }
-```
 
-# Véletlenszám
+Véletlenszám
 
-```java
 Random rnd = new Random();
 int randomNumberTo10 = rnd.nextInt(10); // 0 - 9-ig generálhat számokat, 10-et sosem generál
-```
 
-# Felsorolásos típus
+Felsorolásos típus
 
-```java
 public enum Coin {
     TWOHUNDRED, HUNDRED, TWENTY, TEN, FIVE
 }
-```
 
-# JUnit
+JUnit
+Függőségek
 
-```java
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.7.1</version>
+    <scope>test</scope>
+</dependency>
+
+Teszt osztály
+
 public class TestCalculator {
 
     void testAdd() {
@@ -227,11 +190,9 @@ public class TestCalculator {
         assertEquals(5, result);
     }
 }
-```
 
-# Kivételkezelés
+Kivételkezelés
 
-```java
 try {    
      int result = a / b;
      // Ha nincs hiba
@@ -244,13 +205,11 @@ finally {
     // Minden esetben lefut
     System.out.println("Finally");
 }
-```
 
-# Összegzés tétele
+Összegzés tétele
 
 Listában szereplő számok összege
 
-```java
 public int sum(List<Integer> numbers) {
     int sum = 0;
     for (Integer n: numbers) {
@@ -258,13 +217,11 @@ public int sum(List<Integer> numbers) {
     }
     return sum;
 }
-```
 
-# Számlálás tétele
+Számlálás tétele
 
-A stringben szereplő `b` betűk száma:
+A stringben szereplő b betűk száma:
 
-```java
 public int countLetterB(String s) {
     int count = 0;
     for (char c: s.toCharArray()) {
@@ -274,13 +231,11 @@ public int countLetterB(String s) {
     }
     return count;
 }
-```
 
-# Szélsőérték keresés tétele
+Szélsőérték keresés tétele
 
 Listában szereplő legnagyobb szám:
 
-```java
 public int max(List<Integer> numbers) {
     int max = Integer.MIN_VALUE;
     for (Integer n: numbers) {
@@ -290,13 +245,11 @@ public int max(List<Integer> numbers) {
     }
     return max;
 }
-```
 
-# Eldöntés tétele
+Eldöntés tétele
 
 Csak 100-nál nagyobb számokat tartalmaz?
 
-```java
 public boolean containsGreaterThanHundred(List<Integer> numbers) {
     for (Integer i : numbers) {
         if (i > 100) {
@@ -305,13 +258,11 @@ public boolean containsGreaterThanHundred(List<Integer> numbers) {
     }
     return false;
 }
-```
 
-# Szűrés
+Szűrés
 
 Csak a száznál nagyobb számok listáját adja vissza:
 
-```java
 public List<Integer> greaterThanHundred(List<Integer> numbers) {
     List<Integer> filtered = new ArrayList<>();
     for (Integer i : numbers) {
@@ -321,13 +272,11 @@ public List<Integer> greaterThanHundred(List<Integer> numbers) {
     }
     return filtered;
 }
-```
 
-# Transzformáció
+Transzformáció
 
 Csak a neveket adja vissza:
 
-```java
 public List<String> getNames(List<Employee> employees) {
     List<String> names = new ArrayList<>();
     for (Employee employee: employees) {
@@ -335,11 +284,9 @@ public List<String> getNames(List<Employee> employees) {
     }
     return names;
 }
-```
 
-# Szöveges fájl beolvasása soronként
+Szöveges fájl beolvasása soronként
 
-```java
 public class FileReader {
 
     public List<String> readLines(BufferedReader reader) throws IOException {
@@ -357,21 +304,17 @@ public class FileReader {
         }
     }
 }
-```
 
 Ugyanez classpathról:
 
-```java
 try (BufferedReader reader = new BufferedReader(new InputStreamReader(FileReader.class.getResourceAsStream("data.csv")))) {
     new FileReader().readLines(reader);
 } catch (IOException ioe) {
     throw new IllegalStateException("Can not read file", ioe);
 }
-```
 
-# Szöveges állomány kiírása soronként
+Szöveges állomány kiírása soronként
 
-```java
 public class FileWriter {
 
     public void writeLines(List<String> employees, BufferedWriter writer) {
@@ -392,11 +335,9 @@ public class FileWriter {
         }
     }
 }
-```
 
-# Set
+Set
 
-```java
 Set<String> names = new HashSet<>();
 names.add("John");
 names.add("Jack");
@@ -410,11 +351,9 @@ boolean contains = names.contains("Jack"); // true
 for (String name: names) {
     System.out.println(name);
 }
-```
 
-# Map
+Map
 
-```java
 Map<String, String> words = new HashMap<>();
 words.put("apple", "alma");
 words.put("peer", "körte");
@@ -430,13 +369,11 @@ Collection<String> values = words.values(); // Értékek
 for (Map.Entry entry: words.entrySet()) {
     System.out.println(entry.getKey() + " - " + entry.getValue());
 }
-```
 
-# Számlálás Map-pel
+Számlálás Map-pel
 
 Számoljuk meg, melyik betűből mennyi van egy Stringben!
 
-```java
 String s = "alma mater";
 Map<Character, Integer> countOfLetters = new HashMap<>();
 for (char c: s.toCharArray()) {
@@ -449,11 +386,9 @@ for (char c: s.toCharArray()) {
 }
 System.out.println(countOfLetters); // { =1, a=3, r=1, t=1, e=1, l=1, m=2}
 int numberOfM = countOfLetters.get('m'); // 2
-```
 
-# Lista rendezése
+Lista rendezése
 
-```java
 List<Integer> numbers = new ArrayList<>(List.of(6, 5, 8, 3));
 Collections.sort(numbers);
 
@@ -473,4 +408,124 @@ Collections.sort(employees, new Comparator<Employee>() {
         return o1.getName().compareTo(o2.getName());
     }
 });
-```
+
+JDBC
+Függőségek
+
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.7.2</version>
+</dependency>
+<dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-core</artifactId>
+    <version>7.5.3</version>
+</dependency>
+
+DataSource létrehozása
+
+MariaDbDataSource dataSource;
+try {
+    dataSource = new MariaDbDataSource();
+    dataSource.setUrl("jdbc:mariadb://localhost:3306/employees?useUnicode=true");
+    dataSource.setUser("employees");
+    dataSource.setPassword("employees");
+}
+catch (SQLException se) {
+    throw new IllegalStateException("Can not create data source", se);
+}
+
+Flyway
+
+Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+
+flyway.clean();
+flyway.migrate();
+
+Paraméterezett insert, update, delete
+
+try (
+        Connection conn = dataSource.getConnection();
+        PreparedStatement stmt =
+                conn.prepareStatement("insert into employees(emp_name) values (?)")) {
+    stmt.setString(1, name);
+    stmt.executeUpdate();
+}
+catch (SQLException se) {
+    throw new IllegalStateException("Cannot insert", se);
+}
+
+Lekérdezés
+
+public List<String> listEmployeeNames() {
+    try (
+            Connection conn = dataSource.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select emp_name from employees order by emp_name")
+    ) {
+        List<String> names = new ArrayList<>();
+        while (rs.next()) {
+            String name = rs.getString("emp_name");
+            names.add(name);
+        }
+        return names;
+    }
+    catch (SQLException se) {
+        throw new IllegalStateException("Cannot select employees", se);
+    }
+}
+
+Paraméterezett lekérdezés
+
+try (
+        Connection conn = dataSource.getConnection();
+        PreparedStatement stmt =
+          conn.prepareStatement("select emp_name from employees where id = ?");
+) {
+    stmt.setLong(1, id);
+
+    // ...
+} catch (SQLException sqle) {
+    throw new IllegalArgumentException("Error by insert", sqle);
+}
+
+try (
+        ResultSet rs = stmt.executeQuery();
+) {
+    if (rs.next()) {
+        String name = rs.getString("emp_name");
+        return name;
+    }
+    throw new IllegalArgumentException("No result");
+} catch (SQLException sqle) {
+    throw new IllegalArgumentException("Error by insert", sqle);
+}
+
+Generált azonosító lekérdezése
+
+try (Connection conn = dataSource.getConnection();
+     PreparedStatement stmt = conn.prepareStatement("insert into employees(emp_name) values (?)",
+             Statement.RETURN_GENERATED_KEYS)
+) {
+
+    stmt.setString(1, name);
+    stmt.executeUpdate();
+    return executeAndGetGeneratedKey(stmt);
+} catch (SQLException sqle) {
+    throw new IllegalArgumentException("Error by insert", sqle);
+}
+
+private long executeAndGetGeneratedKey(PreparedStatement stmt) {
+    try (
+            ResultSet rs = stmt.getGeneratedKeys();
+    ) {
+        if (rs.next()) {
+            return rs.getLong(1);
+        } else {
+            throw new SQLException("No key has generated");
+        }
+    } catch (SQLException sqle) {
+        throw new IllegalArgumentException("Error by insert", sqle);
+    }
+}

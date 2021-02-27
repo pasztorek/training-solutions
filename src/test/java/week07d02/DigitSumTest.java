@@ -1,6 +1,6 @@
 package week07d02;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import week07d01.MathAlgorithms;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

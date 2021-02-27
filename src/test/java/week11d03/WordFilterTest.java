@@ -1,6 +1,8 @@
 package week11d03;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import schoolrecords.Student;
 import stringmethods.filename.FileNameManipulator;
 

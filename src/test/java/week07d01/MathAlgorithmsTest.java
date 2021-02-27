@@ -1,6 +1,6 @@
 package week07d01;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import week06d04.Budget;
 import week06d05.Biscuit;
 import week06d05.BiscuitType;

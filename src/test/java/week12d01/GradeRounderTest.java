@@ -1,6 +1,8 @@
 package week12d01;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
