@@ -54,8 +54,15 @@ public class ActivityDaoTest {
     @Test
     public void test1(){
 
-        assertEquals("startTime=2021-02-01T10:10, desc='Hegymászás', type=HIKING}", adao.findById(1L));
+        assertEquals(ActivityType.HIKING, adao.findById(1L).getType());
 
     }
 
+    @Test
+
+    public void  test2(){
+        Activity act3 = new Activity(LocalDateTime.of(2022, 02, 02, 20, 20), "Bicajozás", ActivityType.BIKING);
+        adao.insertData(act3);
+
+    }
 }

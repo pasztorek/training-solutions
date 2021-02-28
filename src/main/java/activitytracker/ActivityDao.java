@@ -13,15 +13,23 @@ public class ActivityDao {
         this.ds = ds;
     }
 
-    public void insertData(Activity act){
+    public Long insertData(Activity act){
 
-        try(
-                Connection conn = ds.getConnection()){
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO activities (start_time, activity_type, activity_desc) values(?,?,?)");
+        try(Connection conn = ds.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO activities (start_time, activity_type, activity_desc) values(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
             stmt.setTimestamp(1, Timestamp.valueOf(act.getStartTime()));
             stmt.setString(2, act.getType().toString());
             stmt.setString(3, act.getDesc());
             stmt.executeUpdate();
+
+            try(ResultSet rs = stmt.getGeneratedKeys()){
+                if (rs.next()){
+                    return rs.getLong(1);
+                }
+                throw new IllegalArgumentException("Nem sikerült az INSERT");
+            }
 
 
         } catch (SQLException se) {
@@ -29,10 +37,9 @@ public class ActivityDao {
         }
     }
 
-    public String findById(Long id){
+    public Activity findById(Long id){
 
-        try(
-                Connection conn = ds.getConnection()){
+        try(Connection conn = ds.getConnection()){
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM activities WHERE ID =?");
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -40,14 +47,13 @@ public class ActivityDao {
 
             Activity act = new Activity(rs.getTimestamp("start_time").toLocalDateTime(), rs.getString("activity_desc"), ActivityType.valueOf(rs.getString("activity_type")));
 
-            return act.toString();
+            return act;
 
         } catch (SQLException se) {
             throw new IllegalArgumentException("Nincs eredmény.", se);
         }
 
     }
-
     public List<Activity> getAllRecors(){
         List<Activity> result = new ArrayList<>();
 
