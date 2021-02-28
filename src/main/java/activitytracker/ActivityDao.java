@@ -13,7 +13,7 @@ public class ActivityDao {
         this.ds = ds;
     }
 
-    public Long insertData(Activity act){
+    public Activity insertData(Activity act){
 
         try(Connection conn = ds.getConnection()){
 
@@ -25,16 +25,20 @@ public class ActivityDao {
             stmt.executeUpdate();
 
             try(ResultSet rs = stmt.getGeneratedKeys()){
+
                 if (rs.next()){
-                    return rs.getLong(1);
+                     return new Activity(rs.getLong(1),act.getStartTime(), act.getDesc(), act.getType());
                 }
-                throw new IllegalArgumentException("Nem sikerült az INSERT");
+                else {
+                    throw new IllegalArgumentException("Nincs key generálva");
+                }
             }
 
 
         } catch (SQLException se) {
             throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
+
     }
 
     public Activity findById(Long id){

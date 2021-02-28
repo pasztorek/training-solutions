@@ -41,7 +41,9 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "startTime=" + startTime +
+        return "Activity{" +
+                "id=" + id +
+                ", startTime=" + startTime +
                 ", desc='" + desc + '\'' +
                 ", type=" + type +
                 '}';
