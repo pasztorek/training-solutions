@@ -33,9 +33,9 @@ public class ActivityDaoTest {
             throw new IllegalStateException("Nem tudok kapcsolódni az adatbázishoz.", ee);
         }
 
-       Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-       flyway.clean();
-       flyway.migrate();
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
 
         Activity act1 = new Activity(LocalDateTime.of(2021, 02, 01, 10, 10), "Hegymászás", ActivityType.HIKING);
         Activity act2 = new Activity(LocalDateTime.of(2021, 02, 01, 10, 10), "Futás", ActivityType.RUNNING);
@@ -50,15 +50,14 @@ public class ActivityDaoTest {
     }
 
     @Test
-    public void findById Test(){
+   public void findById(){
 
         assertEquals(ActivityType.HIKING, adao.findById(1L).getType());
 
     }
 
     @Test
-
-    public void  insertActivityTest(){
+    public void insertActivityTest(){
         Activity act3 = new Activity(LocalDateTime.of(2022, 02, 02, 20, 20), "Bicajozás", ActivityType.BIKING);
         System.out.println(adao.insertData(act3));
 
