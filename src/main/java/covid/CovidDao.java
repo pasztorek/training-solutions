@@ -64,4 +64,26 @@ public class CovidDao {
 
     }
 
+    public void uploadCitizens(String ctz){
+        String[] person = ctz.split(";");
+
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO citizens (name, zip, age, email, taj) values(?,?,?,?,?)");
+
+            stmt.setString(1, person[0]);
+            stmt.setString(2, person[1]);
+            stmt.setInt(3, Integer.parseInt(person[2]));
+            stmt.setString(4, person[3]);
+            stmt.setString(5, person[4]);
+
+            stmt.executeUpdate();
+
+
+        } catch (SQLException se) {
+            throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
+        }
+
+    }
+
 }

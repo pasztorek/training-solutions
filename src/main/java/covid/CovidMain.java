@@ -1,9 +1,10 @@
 package covid;
 
-import org.mariadb.jdbc.MariaDbDataSource;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class CovidMain {
@@ -22,14 +23,15 @@ public class CovidMain {
         int menuId = scanner.nextInt();
 
         if(menuId==1){
-            cvdm.manualRegistration(1);
+            cvdm.manualRegistration();
         }
-
+        if(menuId==2){
+            cvdm.massRegistration();
+        }
 
     }
 
-
-    public void manualRegistration(int munuId) {
+    public void manualRegistration() {
 
         CovidDao cdao = new CovidDao();
         cdao.connectToDataBase();
@@ -62,8 +64,21 @@ public class CovidMain {
 
     }
 
-    public void massRegistration(int munuId){
+    public void massRegistration(){
 
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
+        try (BufferedReader reader = Files.newBufferedReader(Path.of("citizens2.csv"))) {
+            String line;
+            while ((line = reader.readLine())  != null) {
+
+                cdao.uploadCitizens(line);
+            }
+
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
     }
 
     public void generating(int munuId){
