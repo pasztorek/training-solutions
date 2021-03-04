@@ -1,5 +1,9 @@
 package covid;
 
+import org.mariadb.jdbc.MariaDbDataSource;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CovidMain {
@@ -25,7 +29,11 @@ public class CovidMain {
     }
 
 
-    public void manualRegistration(int munuId){
+    public void manualRegistration(int munuId) {
+
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
         System.out.println("REGISZTRÁCIÓ");
         System.out.println("Név:");
 
@@ -33,17 +41,24 @@ public class CovidMain {
         String name = scanner.nextLine();
 
         System.out.println("Irányítószám:");
-        String zip = scanner.nextLine();
+        Scanner scanner2 = new Scanner(System.in);
+        String zip = scanner2.nextLine();
+        System.out.println(cdao.getCity(zip));
 
         System.out.println("Életkor:");
+        Scanner scanner3 = new Scanner(System.in);
+        int age = scanner3.nextInt();
 
         System.out.println("E-mail cím:");
+        Scanner scanner4 = new Scanner(System.in);
+        String email = scanner4.nextLine();
 
         System.out.println("TAJ szám:");
+        Scanner scanner5 = new Scanner(System.in);
+        String taj = scanner5.nextLine();
 
-
-
-
+        Citizen ctz = new Citizen(name, zip, age, email, taj);
+        cdao.insertCitizen(ctz);
 
     }
 
