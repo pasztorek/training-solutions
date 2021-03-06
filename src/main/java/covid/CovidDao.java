@@ -3,6 +3,7 @@ package covid;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CovidDao {
@@ -43,7 +44,7 @@ public class CovidDao {
 
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
+            throw new IllegalStateException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
 
     }
@@ -61,7 +62,7 @@ public class CovidDao {
             return result;
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException("Nincs eredmény.", se);
+            throw new IllegalStateException("Nincs eredmény.", se);
         }
 
     }
@@ -84,24 +85,29 @@ public class CovidDao {
 
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
+            throw new IllegalStateException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
 
     }
     public List<String> getListbyZip(String zip){
+        List<String> result = new ArrayList<>();
         try(Connection conn = dataSource.getConnection()){
 
-            PreparedStatement stmt = conn.prepareStatement("SELECT city_name from CITIES where zip_code =?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT NAME, zip, age, email, taj FROM citizens WHERE zip=? AND number_of_vaccinations < 2 order by age desc, name limit 16");
 
             stmt.setString(1, zip);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-            String result = rs.getString("city_name");
 
-            return null;
+            while (rs.next()){
+
+               result.add(rs.getString("name")+";"+rs.getString("zip")+";"+rs.getInt("age")+";"+rs.getString("email")+";"+rs.getString("taj")+"\n");
+
+            }
+
+            return result;
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException("Nincs eredmény.", se);
+            throw new IllegalStateException("Nincs eredmény.", se);
         }
 
 

@@ -1,10 +1,9 @@
 package covid;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 public class CovidMain {
@@ -93,9 +92,24 @@ public class CovidMain {
         String zip = scanner.nextLine();
         System.out.println(cdao.getCity(zip));
         System.out.println("Menteni kívánt file neve:");
+        String fileName = scanner.nextLine();
+        fileWriter(cdao.getListbyZip(zip),fileName);
+    }
 
+    public void fileWriter(List<String> vaccinationPlan, String fileName){
 
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(fileName))) {
+            try {
+                for (String plan : vaccinationPlan) {
+                    writer.write(plan);
+                }
+            } catch (IOException ioe) {
+                throw new IllegalStateException("Can not read file", ioe);
+            }
 
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not write file", ioe);
+        }
     }
 
     public void vaccinacion(){
