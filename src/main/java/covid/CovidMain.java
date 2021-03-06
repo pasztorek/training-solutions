@@ -77,7 +77,6 @@ public class CovidMain {
 
                 cdao.uploadCitizens(line);
             }
-
         } catch (IOException ioe) {
             throw new IllegalStateException("Can not read file", ioe);
         }
@@ -100,6 +99,7 @@ public class CovidMain {
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(fileName))) {
             try {
+                writer.write("Időpont;Név;Irányítószám;Életkor;E-mail cím;TAJ szám"+"\n");
                 for (String plan : vaccinationPlan) {
                     writer.write(plan);
                 }
