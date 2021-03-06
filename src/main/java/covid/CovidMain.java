@@ -28,6 +28,9 @@ public class CovidMain {
         if(menuId==2){
             cvdm.massRegistration();
         }
+        if(menuId==3){
+            cvdm.generatingFile();
+        }
 
     }
 
@@ -81,15 +84,25 @@ public class CovidMain {
         }
     }
 
-    public void generating(int munuId){
+    public void generatingFile(){
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
+        System.out.println("Kérek egy irányítószámot:");
+        Scanner scanner = new Scanner(System.in);
+        String zip = scanner.nextLine();
+        System.out.println(cdao.getCity(zip));
+        System.out.println("Menteni kívánt file neve:");
+
+
 
     }
 
-    public void vaccinacion(int munuId){
+    public void vaccinacion(){
 
     }
 
-    public void vaccinationFail(int munuId){
+    public void vaccinationFail(){
 
     }
 

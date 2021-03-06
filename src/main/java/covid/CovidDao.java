@@ -3,6 +3,7 @@ package covid;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.*;
+import java.util.List;
 
 public class CovidDao {
 
@@ -29,13 +30,14 @@ public class CovidDao {
 
             try(Connection conn = dataSource.getConnection()){
 
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO citizens (name, zip, age, email, taj) values(?,?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO citizens (name, zip, age, email, taj, number_of_vaccinations) values(?,?,?,?,?)");
 
             stmt.setString(1, ctz.getName());
             stmt.setString(2, ctz.getZip());
             stmt.setInt(3, ctz.getAge());
             stmt.setString(4, ctz.getEmail());
             stmt.setString(5, ctz.getTaj());
+            stmt.setInt(6, 0);
 
             stmt.executeUpdate();
 
@@ -59,7 +61,7 @@ public class CovidDao {
             return result;
 
         } catch (SQLException se) {
-            throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
+            throw new IllegalArgumentException("Nincs eredmény.", se);
         }
 
     }
@@ -69,13 +71,14 @@ public class CovidDao {
 
         try(Connection conn = dataSource.getConnection()){
 
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO citizens (name, zip, age, email, taj) values(?,?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO citizens (name, zip, age, email, taj, number_of_vaccinations) values(?,?,?,?,?,?)");
 
             stmt.setString(1, person[0]);
             stmt.setString(2, person[1]);
             stmt.setInt(3, Integer.parseInt(person[2]));
             stmt.setString(4, person[3]);
             stmt.setString(5, person[4]);
+            stmt.setInt(6, 0);
 
             stmt.executeUpdate();
 
@@ -83,6 +86,24 @@ public class CovidDao {
         } catch (SQLException se) {
             throw new IllegalArgumentException("Nem tudok adatot beszúrni az adatbázisba.", se);
         }
+
+    }
+    public List<String> getListbyZip(String zip){
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("SELECT city_name from CITIES where zip_code =?");
+
+            stmt.setString(1, zip);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            String result = rs.getString("city_name");
+
+            return null;
+
+        } catch (SQLException se) {
+            throw new IllegalArgumentException("Nincs eredmény.", se);
+        }
+
 
     }
 
