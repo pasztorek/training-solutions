@@ -99,10 +99,13 @@ public class CovidMain {
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(fileName))) {
             try {
+                String[]schedule = {"08:00;","8:30;","09:00;","9:30;","10:00;","10:30;","11:00;","11:30;","12:00;","12:30;","13:00;","13:30;","14:00;","14:30;","15:00;","15:30;"};
                 writer.write("Időpont;Név;Irányítószám;Életkor;E-mail cím;TAJ szám"+"\n");
-                for (String plan : vaccinationPlan) {
-                    writer.write(plan);
+
+                for (int i=0; i<16; i++) {
+                    writer.write(schedule[i]+vaccinationPlan.get(i));
                 }
+
             } catch (IOException ioe) {
                 throw new IllegalStateException("Can not read file", ioe);
             }
