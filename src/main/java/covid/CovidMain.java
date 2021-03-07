@@ -136,6 +136,7 @@ public class CovidMain {
     public void vaccinations(){
         CovidDao cdao = new CovidDao();
         cdao.connectToDataBase();
+        String VaccineName = "-";
 
         System.out.println("TAJ szám:");
         Scanner scanner = new Scanner(System.in);
@@ -143,15 +144,16 @@ public class CovidMain {
 
         Citizen ctz = cdao.getVaccionationsData(taj);
         System.out.println(ctz.getName()+" eddig "+ ctz.getNumOfVaccine()+" oltást kapott.");
+
         if(ctz.getLastVaccination()!=null && ctz.getNumOfVaccine()!=0){
             if(LocalDate.now().minusDays(15).isBefore(ctz.getLastVaccination())){
                 System.out.println("Még nem telt el 15 nap az első oltás óta.");
                 vaccinations();
             }
+            VaccineName = cdao.getVaccineType(ctz.getId());
+            System.out.println("Utolsó oltás: " + ctz.getLastVaccination()+" - "+VaccineName);
         }
 
-
-        String VaccineName = "";
 
         if(ctz.getNumOfVaccine()==0) {
             System.out.println("Melyikkel oltakozzunk? Kérek egy számot:");
@@ -175,7 +177,7 @@ public class CovidMain {
         System.out.println("Oltakozás dátuma(YYYY-MM-DD):");
         Scanner scanner3 = new Scanner(System.in);
         LocalDate date = LocalDate.parse(scanner.nextLine());
-        cdao.injection(ctz.getId(),date, VaccineName, ctz.getNumOfVaccine()+1);
+        cdao.injection(ctz.getId(),date, VaccineName, ctz.getNumOfVaccine());
 
     }
 

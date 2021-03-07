@@ -144,17 +144,43 @@ public class CovidDao {
 
     }
 
+    public String getVaccineType(Long ctzId){
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("SELECT vaccinatio_type FROM vaccinations WHERE citizen_id = ?");
+
+            stmt.setLong(1, ctzId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            return rs.getString("vaccinatio_type");
+
+        } catch (SQLException se) {
+            throw new IllegalStateException("Nincs eredmény.", se);
+        }
+
+    }
+
     public void injection(Long ctzId, LocalDate date, String VaccineType, int VaccineNumber){
 
         try(Connection conn = dataSource.getConnection()){
 
             PreparedStatement stmt = conn.prepareStatement("UPDATE citizens SET number_of_vaccinations = ?, last_vaccination = ? WHERE id =?");
+            PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO vaccinations (citizen_id, status, vaccinatio_type, vaccination_date) VALUES (?, ?, ?, ?)");
 
-            stmt.setInt(1,VaccineNumber);
+            stmt.setInt(1,VaccineNumber+1);
             stmt.setTimestamp(2, Timestamp.valueOf(date.atTime(LocalTime.MIDNIGHT)));
             stmt.setLong(3, ctzId);
+            stmt.executeUpdate();
 
-            System.out.println(stmt.executeUpdate());
+            stmt2.setLong(1, ctzId);
+            stmt2.setString(2,"OK");
+            stmt2.setString(3,VaccineType);
+            stmt2.setTimestamp(4, Timestamp.valueOf(date.atTime(LocalTime.MIDNIGHT)));
+            stmt2.executeUpdate();
+
+
+            //System.out.println(stmt.executeUpdate());
 
 
         } catch (SQLException se) {
