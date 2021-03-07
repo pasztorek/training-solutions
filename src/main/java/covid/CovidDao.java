@@ -3,6 +3,7 @@ package covid;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +111,24 @@ public class CovidDao {
             throw new IllegalStateException("Nincs eredmény.", se);
         }
 
+    }
+    public Citizen getVaccionationsData(String taj){
+
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, name, zip, age, email, taj, number_of_vaccinations, last_vaccination FROM citizens WHERE taj=?");
+
+            stmt.setString(1, taj);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            Citizen ctz = new Citizen(rs.getInt("id"),rs.getString("name"),rs.getString("zip"),rs.getInt("age"),rs.getString("email"), rs.getString("taj"),rs.getInt("number_of_vaccinations"), rs.getTimestamp("last_vaccination").toLocalDateTime().toLocalDate());
+           // String result = rs.getString("name") +" eddig "+ rs.getInt("number_of_vaccinations")+" oltást kapott.";
+            return ctz;
+
+        } catch (SQLException se) {
+            throw new IllegalStateException("Nincs eredmény.", se);
+        }
 
     }
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Citizen {
 
+private long id;
 private String name;
 private String zip;
 private int age;
@@ -18,6 +19,17 @@ private LocalDate lastVaccination;
         this.age = age;
         this.email = email;
         this.taj = taj;
+    }
+
+    public Citizen(long id, String name, String zip, int age, String email, String taj, int numOfVaccine, LocalDate lastVaccination) {
+        this.id = id;
+        this.name = name;
+        this.zip = zip;
+        this.age = age;
+        this.email = email;
+        this.taj = taj;
+        this.numOfVaccine = numOfVaccine;
+        this.lastVaccination = lastVaccination;
     }
 
     public String getName() {
@@ -48,4 +60,17 @@ private LocalDate lastVaccination;
         return lastVaccination;
     }
 
+    @Override
+    public String toString() {
+        return "Citizen{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", zip='" + zip + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", taj='" + taj + '\'' +
+                ", numOfVaccine=" + numOfVaccine +
+                ", lastVaccination=" + lastVaccination +
+                '}';
+    }
 }

@@ -31,7 +31,14 @@ public class CovidMain {
             cvdm.generatingFile();
         }
 
+        if(menuId==4){
+            cvdm.vaccinations();
+        }
+
+
     }
+
+
 
     public void manualRegistration() {
 
@@ -107,7 +114,7 @@ public class CovidMain {
                 }
 
             } catch (IOException ioe) {
-                throw new IllegalStateException("Can not read file", ioe);
+                throw new IllegalStateException("Can not write file", ioe);
             }
 
         } catch (IOException ioe) {
@@ -115,7 +122,16 @@ public class CovidMain {
         }
     }
 
-    public void vaccinacion(){
+    public void vaccinations(){
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
+        System.out.println("TAJ szám:");
+        Scanner scanner = new Scanner(System.in);
+        String taj = scanner.nextLine();
+
+        System.out.println(cdao.getVaccionationsData(taj));
+
 
     }
 
