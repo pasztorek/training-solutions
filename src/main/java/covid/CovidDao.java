@@ -4,6 +4,8 @@ import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,6 +141,26 @@ public class CovidDao {
         } catch (SQLException se) {
             throw new IllegalStateException("Nincs eredmény.", se);
         }
+
+    }
+
+    public void injection(Long ctzId, LocalDate date, String VaccineType, int VaccineNumber){
+
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("UPDATE citizens SET number_of_vaccinations = ?, last_vaccination = ? WHERE id =?");
+
+            stmt.setInt(1,VaccineNumber);
+            stmt.setTimestamp(2, Timestamp.valueOf(date.atTime(LocalTime.MIDNIGHT)));
+            stmt.setLong(3, ctzId);
+
+            System.out.println(stmt.executeUpdate());
+
+
+        } catch (SQLException se) {
+            throw new IllegalStateException("Nincs eredmény.", se);
+        }
+
 
     }
 

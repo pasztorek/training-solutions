@@ -3,6 +3,7 @@ package covid;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -119,7 +120,7 @@ public class CovidMain {
                 String[]schedule = {"08:00;","8:30;","09:00;","9:30;","10:00;","10:30;","11:00;","11:30;","12:00;","12:30;","13:00;","13:30;","14:00;","14:30;","15:00;","15:30;"};
                 writer.write("Időpont;Név;Irányítószám;Életkor;E-mail cím;TAJ szám"+"\n");
 
-                for (int i=0; i<16; i++) {
+                for (int i=0; i<vaccinationPlan.size(); i++) {
                     writer.write(schedule[i]+vaccinationPlan.get(i));
                 }
 
@@ -142,12 +143,39 @@ public class CovidMain {
 
         Citizen ctz = cdao.getVaccionationsData(taj);
         System.out.println(ctz.getName()+" eddig "+ ctz.getNumOfVaccine()+" oltást kapott.");
+        if(ctz.getLastVaccination()!=null && ctz.getNumOfVaccine()!=0){
+            if(LocalDate.now().minusDays(15).isBefore(ctz.getLastVaccination())){
+                System.out.println("Még nem telt el 15 nap az első oltás óta.");
+                vaccinations();
+            }
+        }
+
+
+        String VaccineName = "";
 
         if(ctz.getNumOfVaccine()==0) {
             System.out.println("Melyikkel oltakozzunk? Kérek egy számot:");
             for (VaccineTypes vt : VaccineTypes.values())
                 System.out.println("" + vt.getId() + " " + vt);
+
+
+            Scanner scanner2 = new Scanner(System.in);
+            int vt = scanner2.nextInt();
+
+
+            for (VaccineTypes vt2 : VaccineTypes.values()) {
+                if (vt2.getId() == vt) {
+                    System.out.println(vt2.toString());
+                    VaccineName = vt2.toString();
+                }
+            }
         }
+
+
+        System.out.println("Oltakozás dátuma(YYYY-MM-DD):");
+        Scanner scanner3 = new Scanner(System.in);
+        LocalDate date = LocalDate.parse(scanner.nextLine());
+        cdao.injection(ctz.getId(),date, VaccineName, ctz.getNumOfVaccine()+1);
 
     }
 

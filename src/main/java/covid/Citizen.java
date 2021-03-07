@@ -60,6 +60,10 @@ private LocalDate lastVaccination;
         return lastVaccination;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Citizen{" +
