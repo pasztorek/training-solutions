@@ -38,8 +38,6 @@ public class CovidMain {
 
     }
 
-
-
     public void manualRegistration() {
 
         CovidDao cdao = new CovidDao();
@@ -54,7 +52,13 @@ public class CovidMain {
         System.out.println("Irányítószám:");
         Scanner scanner2 = new Scanner(System.in);
         String zip = scanner2.nextLine();
-        System.out.println(cdao.getCity(zip));
+        String city = cdao.getCity(zip);
+
+        if(city.equals("Nincs ilyen város")){
+            System.out.println(city);
+            manualRegistration();
+        }
+
 
         System.out.println("Életkor:");
         Scanner scanner3 = new Scanner(System.in);
@@ -96,7 +100,13 @@ public class CovidMain {
         System.out.println("Kérek egy irányítószámot:");
         Scanner scanner = new Scanner(System.in);
         String zip = scanner.nextLine();
-        System.out.println(cdao.getCity(zip));
+
+        String city= cdao.getCity(zip);
+        if(city.equals("Nincs ilyen város")){
+            System.out.println(city);
+            generatingFile();
+        }
+
         System.out.println("Menteni kívánt file neve:");
         String fileName = scanner.nextLine();
         fileWriter(cdao.getListbyZip(zip),fileName);
@@ -130,8 +140,14 @@ public class CovidMain {
         Scanner scanner = new Scanner(System.in);
         String taj = scanner.nextLine();
 
-        System.out.println(cdao.getVaccionationsData(taj));
+        Citizen ctz = cdao.getVaccionationsData(taj);
+        System.out.println(ctz.getName()+" eddig "+ ctz.getNumOfVaccine()+" oltást kapott.");
 
+        if(ctz.getNumOfVaccine()==0) {
+            System.out.println("Melyikkel oltakozzunk? Kérek egy számot:");
+            for (VaccineTypes vt : VaccineTypes.values())
+                System.out.println("" + vt.getId() + " " + vt);
+        }
 
     }
 

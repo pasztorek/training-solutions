@@ -58,6 +58,11 @@ public class CovidDao {
 
             stmt.setString(1, zip);
             ResultSet rs = stmt.executeQuery();
+
+            if(!rs.next()){
+                return "Nincs ilyen város";
+            }
+
             rs.next();
             String result = rs.getString("city_name");
             return result;
@@ -99,6 +104,11 @@ public class CovidDao {
             stmt.setString(1, zip);
             ResultSet rs = stmt.executeQuery();
 
+
+            if(!rs.next()){
+                return null;
+            }
+
             while (rs.next()){
 
                result.add(rs.getString("name")+";"+rs.getString("zip")+";"+rs.getInt("age")+";"+rs.getString("email")+";"+rs.getString("taj")+"\n");
@@ -123,7 +133,7 @@ public class CovidDao {
             rs.next();
 
             Citizen ctz = new Citizen(rs.getInt("id"),rs.getString("name"),rs.getString("zip"),rs.getInt("age"),rs.getString("email"), rs.getString("taj"),rs.getInt("number_of_vaccinations"), rs.getTimestamp("last_vaccination").toLocalDateTime().toLocalDate());
-           // String result = rs.getString("name") +" eddig "+ rs.getInt("number_of_vaccinations")+" oltást kapott.";
+
             return ctz;
 
         } catch (SQLException se) {
