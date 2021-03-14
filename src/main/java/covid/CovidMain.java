@@ -36,6 +36,9 @@ public class CovidMain {
             cvdm.vaccinations();
         }
 
+        if(menuId==4){
+            cvdm.vaccinationFail();
+        }
 
     }
 
@@ -141,15 +144,29 @@ public class CovidMain {
         System.out.println("TAJ szám:");
         Scanner scanner = new Scanner(System.in);
         String taj = scanner.nextLine();
+        Validator vd = new Validator();
+        vd.tajCDVCheck(taj);
+
+        if(cdao.getVaccionationsData(taj)==null){
+            System.out.println("Nincs ilyen regisztrált taj!");
+            //return;
+            vaccinations();
+        }
 
         Citizen ctz = cdao.getVaccionationsData(taj);
+
         System.out.println(ctz.getName()+" eddig "+ ctz.getNumOfVaccine()+" oltást kapott.");
 
         if(ctz.getLastVaccination()!=null && ctz.getNumOfVaccine()!=0){
-            if(LocalDate.now().minusDays(15).isBefore(ctz.getLastVaccination())){
+            if(LocalDate.now().minusDays(15).isBefore(ctz.getLastVaccination()) && ctz.getNumOfVaccine()!=2){
                 System.out.println("Még nem telt el 15 nap az első oltás óta.");
                 vaccinations();
             }
+            else if(ctz.getNumOfVaccine()==2){
+                System.out.println("Már nem kaphat több oltást!");
+                vaccinations();
+            }
+
             VaccineName = cdao.getVaccineType(ctz.getId());
             System.out.println("Utolsó oltás: " + ctz.getLastVaccination()+" - "+VaccineName);
         }
@@ -175,13 +192,20 @@ public class CovidMain {
 
 
         System.out.println("Oltakozás dátuma(YYYY-MM-DD):");
-        Scanner scanner3 = new Scanner(System.in);
-        LocalDate date = LocalDate.parse(scanner.nextLine());
+       // Scanner scanner3 = new Scanner(System.in);
+
+      //  LocalDate date = LocalDate.parse(scanner.nextLine());
+
+       // Validator vd = new Validator();
+        LocalDate date = vd.validDate(scanner.nextLine());
         cdao.injection(ctz.getId(),date, VaccineName, ctz.getNumOfVaccine());
 
     }
 
     public void vaccinationFail(){
+
+
+
 
     }
 

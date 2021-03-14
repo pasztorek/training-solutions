@@ -132,7 +132,12 @@ public class CovidDao {
 
             stmt.setString(1, taj);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
+
+            if(!rs.next()){
+                return null;
+            }
+                rs.previous();
+                rs.next();
 
             Citizen ctz = new Citizen(rs.getInt("id"),rs.getString("name"),rs.getString("zip"),rs.getInt("age"),rs.getString("email"), rs.getString("taj"),rs.getInt("number_of_vaccinations"), rs.getTimestamp("last_vaccination").toLocalDateTime().toLocalDate());
 

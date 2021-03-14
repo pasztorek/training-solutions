@@ -1,3 +1,19 @@
+Beállítások a pom.xml-ben
+
+Beállítja, hogy a forrásfájlok karakterkódolása UTF-8 legyen, és 15-ös Javat használjon.
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>15</maven.compiler.source>
+    <maven.compiler.target>15</maven.compiler.target>
+</properties>
+
+A .gitignore fájl
+
+target
+.idea
+*.iml
+
 Main
 
 public static void main(String[] args) {
@@ -143,6 +159,8 @@ List<String> moreNumbers = new ArrayList<>(); // Módosítható lista, diamond o
 
 List<String> copy = new ArrayList<>(numbers); // Módosítható másolat
 
+List<String> namesToModify = new ArrayList<>(List.of("John", "Jack")); // Módosítható lista egy utasításban
+
 copy.add("Jane"); // ["John", "Jack", "Jane"] - hozzáadás
 copy.remove("John"); // ["Jack", "Jane"] - eltávolítás
 
@@ -154,6 +172,29 @@ int indexOfJane = names.indexOf("Jane") // 1 - 1. indexen
 
 for(String name: names){
     System.out.println(name);
+}
+
+Eltávolítás listából, miközben bejárjuk:
+
+List<String> names = new ArrayList<>(List.of("John Doe", "Jack Doe", "John Smith"));
+
+List<String> johns = new ArrayList<>();
+for (String name: names) {
+    if (name.startsWith("John")) {
+        johns.add(name);
+    }
+}
+names.removeAll(johns);
+
+Iterátorral:
+
+List<String> names = new ArrayList<>(List.of("John Doe", "Jack Doe", "John Smith"));
+Iterator<String> it = names.iterator();
+while (it.hasNext()) {
+    String name = it.next();
+    if (name.startsWith("John")) {
+        it.remove();
+    }
 }
 
 Véletlenszám
@@ -170,17 +211,30 @@ public enum Coin {
 JUnit
 Függőségek
 
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-engine</artifactId>
-    <version>5.7.1</version>
-    <scope>test</scope>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.7.1</version>
+        <scope>test</scope>
+    </dependency>
+
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+        </plugin>
+    </plugins>
+</build>
 
 Teszt osztály
 
 public class TestCalculator {
 
+    @Test
     void testAdd() {
         // Given
         Calculator calculator = new Calculator();
@@ -289,7 +343,7 @@ Szöveges fájl beolvasása soronként
 
 public class FileReader {
 
-    public List<String> readLines(BufferedReader reader) throws IOException {
+    public void readLines(BufferedReader reader) throws IOException {
         String line;
         while ((line = reader.readLine())  != null) {
             System.out.println(line);
@@ -317,7 +371,7 @@ Szöveges állomány kiírása soronként
 
 public class FileWriter {
 
-    public void writeLines(List<String> employees, BufferedWriter writer) {
+    public void writeLines(List<Employee> employees, BufferedWriter writer) {
         try {
             for (String employee : employees) {
                 writer.write(employee.getName() + "," + employee.getYearOfBirth());
@@ -328,8 +382,9 @@ public class FileWriter {
     }
 
     public static void main(String[] args) {
+        List<Employee> employees = List.of(new Employee("John Doe", 1970), new Employee("Jack Doe", 1980));
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of("data.csv"))) {
-            new FileWriter().writeLines(writer);
+            new FileWriter().writeLines(employees, writer);
         } catch (IOException ioe) {
             throw new IllegalStateException("Can not write file", ioe);
         }
@@ -396,9 +451,9 @@ Collections.sort(numbers);
 List<String> names = new ArrayList<>(List.of("Benjámin", "Áron", "József", "Arnold"));
 Collections.sort(names, Collator.getInstance(new Locale("hu", "HU")));
 
-List<Employee> employees = List.of(
+List<Employee> employees = new ArrayList<>(List.of(
         new Employee("John Doe", 1980),
-        new Employee("Jack Doe", 1970));
+        new Employee("Jack Doe", 1970)));
 
 // Év vagy név szeretnénk rendezni
 Collections.sort(employees, new Comparator<Employee>() {
