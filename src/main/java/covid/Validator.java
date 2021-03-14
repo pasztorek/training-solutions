@@ -11,6 +11,10 @@ public class Validator {
         try {
 
             ld = LocalDate.parse(date);
+            if(ld.isAfter(LocalDate.now())||ld.isBefore(LocalDate.of(2020,12,01))){
+                throw new IllegalArgumentException("Nem megfelelő dátum");
+            }
+
         }
 
         catch (DateTimeException se) {
@@ -20,6 +24,10 @@ public class Validator {
     }
 
     public boolean tajCDVCheck(String taj){
+
+        if(taj == null || taj.length()!=9 || taj.isEmpty()){
+            throw new IllegalArgumentException("Nem érvényes taj szám!");
+        }
 
             int sum = 0;
 
@@ -38,8 +46,8 @@ public class Validator {
         int cdv = sum % 10;
         if(cdv == Character.getNumericValue(taj.charAt(8))){
             return true;
-        }
 
+        }
         throw new IllegalArgumentException("Nem érvényes taj szám!");
     }
 }

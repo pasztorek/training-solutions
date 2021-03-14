@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CovidDao {
 
@@ -64,6 +66,7 @@ public class CovidDao {
             if(!rs.next()){
                 return "Nincs ilyen város";
             }
+            rs.previous();
 
             rs.next();
             String result = rs.getString("city_name");
@@ -110,6 +113,8 @@ public class CovidDao {
             if(!rs.next()){
                 return null;
             }
+
+            rs.previous();
 
             while (rs.next()){
 
@@ -184,14 +189,52 @@ public class CovidDao {
             stmt2.setTimestamp(4, Timestamp.valueOf(date.atTime(LocalTime.MIDNIGHT)));
             stmt2.executeUpdate();
 
-
-            //System.out.println(stmt.executeUpdate());
-
-
         } catch (SQLException se) {
             throw new IllegalStateException("Nincs eredmény.", se);
         }
 
+    }
+
+    public void vaccinationFail(Long ctzId, LocalDate date, String reason){
+
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO vaccinations (citizen_id, status, vaccinatio_type, vaccination_date, note ) VALUES (?, ?, ?, ?, ?)");
+
+            stmt.setLong(1, ctzId);
+            stmt.setString(2, "NOK");
+            stmt.setString(3, "-");
+            stmt.setTimestamp(4, Timestamp.valueOf(date.atTime(LocalTime.MIDNIGHT)));
+            stmt.setString(5, reason);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException se) {
+            throw new IllegalStateException("Nem lehet a rekordot menteni.", se);
+        }
+
+    }
+
+    public Map<String,Long> report(int numberOfVaccinations){
+
+        Map<String, Long> result = new HashMap<>();
+
+        try(Connection conn = dataSource.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement("SELECT zip, COUNT(name) FROM citizens WHERE number_of_vaccinations = ? GROUP BY zip");
+
+            stmt.setLong(1, numberOfVaccinations);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+
+               result.put(rs.getString(1), rs.getLong(2));
+            }
+                return result;
+
+        } catch (SQLException se) {
+            throw new IllegalStateException("Nincs eredmény.", se);
+        }
 
     }
 

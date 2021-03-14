@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CovidMain {
@@ -18,6 +19,7 @@ public class CovidMain {
         System.out.println("3. Generálás");
         System.out.println("4. Oltás");
         System.out.println("5. Oltás meghiúsulás");
+        System.out.println("6. Riport");
 
         Scanner scanner = new Scanner(System.in);
         int menuId = scanner.nextInt();
@@ -33,16 +35,22 @@ public class CovidMain {
         }
 
         if(menuId==4){
-            cvdm.vaccinations();
+            cvdm.vaccinations(cvdm.getCitizenToVactination());
+
         }
 
-        if(menuId==4){
+        if(menuId==5){
             cvdm.vaccinationFail();
+        }
+
+        if(menuId==6){
+            cvdm.report();
         }
 
     }
 
     public void manualRegistration() {
+        Validator vd = new Validator();
 
         CovidDao cdao = new CovidDao();
         cdao.connectToDataBase();
@@ -75,6 +83,7 @@ public class CovidMain {
         System.out.println("TAJ szám:");
         Scanner scanner5 = new Scanner(System.in);
         String taj = scanner5.nextLine();
+        vd.tajCDVCheck(taj);
 
         Citizen ctz = new Citizen(name, zip, age, email, taj);
         cdao.insertCitizen(ctz);
@@ -120,7 +129,7 @@ public class CovidMain {
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(fileName))) {
             try {
-                String[]schedule = {"08:00;","8:30;","09:00;","9:30;","10:00;","10:30;","11:00;","11:30;","12:00;","12:30;","13:00;","13:30;","14:00;","14:30;","15:00;","15:30;"};
+                String[]schedule = {"08:00;","08:30;","09:00;","09:30;","10:00;","10:30;","11:00;","11:30;","12:00;","12:30;","13:00;","13:30;","14:00;","14:30;","15:00;","15:30;"};
                 writer.write("Időpont;Név;Irányítószám;Életkor;E-mail cím;TAJ szám"+"\n");
 
                 for (int i=0; i<vaccinationPlan.size(); i++) {
@@ -136,35 +145,23 @@ public class CovidMain {
         }
     }
 
-    public void vaccinations(){
+    public void vaccinations(Citizen ctz){
+        Validator vd = new Validator();
+
         CovidDao cdao = new CovidDao();
         cdao.connectToDataBase();
         String VaccineName = "-";
-
-        System.out.println("TAJ szám:");
-        Scanner scanner = new Scanner(System.in);
-        String taj = scanner.nextLine();
-        Validator vd = new Validator();
-        vd.tajCDVCheck(taj);
-
-        if(cdao.getVaccionationsData(taj)==null){
-            System.out.println("Nincs ilyen regisztrált taj!");
-            //return;
-            vaccinations();
-        }
-
-        Citizen ctz = cdao.getVaccionationsData(taj);
 
         System.out.println(ctz.getName()+" eddig "+ ctz.getNumOfVaccine()+" oltást kapott.");
 
         if(ctz.getLastVaccination()!=null && ctz.getNumOfVaccine()!=0){
             if(LocalDate.now().minusDays(15).isBefore(ctz.getLastVaccination()) && ctz.getNumOfVaccine()!=2){
                 System.out.println("Még nem telt el 15 nap az első oltás óta.");
-                vaccinations();
+                vaccinations(getCitizenToVactination());
             }
             else if(ctz.getNumOfVaccine()==2){
                 System.out.println("Már nem kaphat több oltást!");
-                vaccinations();
+                vaccinations(getCitizenToVactination());
             }
 
             VaccineName = cdao.getVaccineType(ctz.getId());
@@ -192,20 +189,62 @@ public class CovidMain {
 
 
         System.out.println("Oltakozás dátuma(YYYY-MM-DD):");
-       // Scanner scanner3 = new Scanner(System.in);
+          Scanner scanner = new Scanner(System.in);
 
-      //  LocalDate date = LocalDate.parse(scanner.nextLine());
-
-       // Validator vd = new Validator();
         LocalDate date = vd.validDate(scanner.nextLine());
         cdao.injection(ctz.getId(),date, VaccineName, ctz.getNumOfVaccine());
 
     }
 
+    public Citizen getCitizenToVactination(){
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
+        System.out.println("TAJ szám:");
+        Scanner scanner = new Scanner(System.in);
+        String taj = scanner.nextLine();
+        Validator vd = new Validator();
+        vd.tajCDVCheck(taj);
+
+        if(cdao.getVaccionationsData(taj)==null){
+            System.out.println("Nincs ilyen regisztrált taj!");
+            getCitizenToVactination();
+        }
+
+        Citizen ctz = cdao.getVaccionationsData(taj);
+
+        return ctz;
+    }
+
     public void vaccinationFail(){
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
 
+        Citizen czt = getCitizenToVactination();
+        System.out.println("Oltakozás meghiúsulásának dátuma(YYYY-MM-DD):");
+        Scanner scanner = new Scanner(System.in);
 
+        Validator vd = new Validator();
+        LocalDate date = vd.validDate(scanner.nextLine());
 
+        System.out.println("Indoklás:");
+        Scanner scanner2 = new Scanner(System.in);
+        String reason = scanner2.nextLine();
+
+        cdao.vaccinationFail(czt.getId(), date, reason);
+
+    }
+
+    public void report(){
+        CovidDao cdao = new CovidDao();
+        cdao.connectToDataBase();
+
+        System.out.println("Nem kaptak oltást:");
+        System.out.println(cdao.report(0).toString());
+        System.out.println("Egy oltást kaptak:");
+        System.out.println(cdao.report(1).toString());
+        System.out.println("Két oltást kaptak:");
+        System.out.println(cdao.report(2).toString());
 
     }
 
